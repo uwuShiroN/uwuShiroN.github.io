@@ -23,10 +23,15 @@ html {
 
 body {
   margin: 0;
-  height: 100vh;
-  overflow: hidden;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
   background-size: cover;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
 .background {
@@ -40,30 +45,28 @@ body {
 }
 
 .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 0.78vw; /* 15px */
+  width: 90vw;
+  max-width: 600px;
+  padding: 5vw;
+  border-radius: 4vw;
   background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 4vw rgba(0, 0, 0, 0.3);
   text-align: center;
-  padding: 2.08vw; /* 40px */
-  box-shadow: 0 0 2.08vw #0000005d; /* 40px */
 }
 
 table,
 th,
 td {
   text-align: center;
-  font-size: 2.08vw; /* 40px */
+  font-size: 2.08vw;
   color: white;
   border-color: white;
 }
 
 .icon {
-  width: 2.5vw;  /* ≈ 48px */
+  width: 2.5vw;
   height: 2.5vw;
   position: relative;
-  margin: 0 0.52vw;  /* ≈ 10px */
+  margin: 0 0.52vw;
 }
