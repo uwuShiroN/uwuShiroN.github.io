@@ -40,6 +40,12 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+    if (isMobile) {
+          console.log("Mobile detected - skipping animation scripts.");
+          return;
+          }
+
       // 背景動畫
       const bg = document.getElementById('bg');
       let targetX = 0, targetY = 0;
