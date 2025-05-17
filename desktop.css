@@ -22,16 +22,14 @@ html {
 }
 
 body {
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
   background-size: cover;
-  overflow: hidden;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
 .background {
@@ -45,14 +43,18 @@ body {
 }
 
 .container {
-  width: 90vw;
+  width: 45vw;
+  height: 25vw;
   max-width: 600px;
-  padding: 5vw;
-  border-radius: 4vw;
+  padding: 1.04vw;
+  border-radius: 0.78vw;
   background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 4vw rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 2.08vw rgba(0, 0, 0, 0.4);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 table,
