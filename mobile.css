@@ -6,6 +6,80 @@ a {
 a:hover {
   color: transparent;
 }
+
+a:visited {
+  color: pink;
+}
+
+a:active {
+  color: yellow;
+}
+
+html {
+  display: table;
+  margin: auto;
+  line-height: 1.5;
+  font-feature-settings: normal;
+  tab-size: 4;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.background {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 40px;
+  box-shadow: 0 0 40px #0000005d;
+}
+
+table,
+th,
+td {
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  border-color: white;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  margin: 0 10px;
+  transition: transform 0.05s ease;
+}
+
+mobile css:
+a {
+  text-decoration: none;
+  background-color: transparent;
+  color: transparent;
+}
+a:hover {
+  color: transparent;
+}
 a:visited {
   color: pink;
 }
@@ -22,15 +96,11 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  margin: 0;
+  height: 100vh;
   overflow: hidden;
   background: url('background.jpg') no-repeat center center fixed;
   background-size: cover;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
 }
 
 .background {
@@ -43,56 +113,34 @@ body {
   background-size: cover;
 }
 
-@media screen and (max-width: 768px) {
-  body {
-    display: flex !important;
-    padding: 10px;
-  }
-
+@media screen and (orientation: landscape) {
   .container {
-    width: 90vw;
-    max-width: 500px;
-    height: auto;
-    min-height: 60vh;
-    padding: 6vw;
-    border-radius: 4vw;
-    margin: 0 auto;
-    font-size: 1.2rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 4vmin rgba(0, 0, 0, 0.4);
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  table, th, td {
-    font-size: 1.5rem !important;
-  }
-
-  .icon {
-    width: 8vw;
-    height: 8vw;
-    min-width: 24px;
-    min-height: 24px;
-    margin: 0 2vw;
+    width: 80vw;
+    padding: 3vw;
+    font-size: 3vw;
   }
 }
 
-@media screen and (max-width: 768px) and (orientation: landscape) {
+@media screen and (orientation: portrait) {
   .container {
-    width: 70vw;
-    height: 70vh;
-    max-width: 600px;
+    width: 90vw;
+    padding: 5vw;
+    font-size: 4vw;
   }
-  
-  table, th, td {
-    font-size: 1.2rem !important;
-  }
-  
-  .icon {
-    width: 6vw;
-    height: 6vw;
-  }
+}
+
+table,
+th,
+td {
+  text-align: center;
+  font-size: 2.08vw;
+  color: white;
+  border-color: white;
+}
+
+.icon {
+  width: 2.5vw;
+  height: 2.5vw;
+  position: relative;
+  margin: 0 0.52vw;
 }
