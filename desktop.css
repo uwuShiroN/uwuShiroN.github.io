@@ -6,9 +6,11 @@ a {
 a:hover {
   color: transparent;
 }
+
 a:visited {
   color: pink;
 }
+
 a:active {
   color: yellow;
 }
@@ -19,8 +21,6 @@ html {
   line-height: 1.5;
   font-feature-settings: normal;
   tab-size: 4;
-  width: 100%;
-  height: 100%;
 }
 
 body {
@@ -29,9 +29,6 @@ body {
   overflow: hidden;
   background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
   background-size: cover;
-  position: relative;
-  display: table-cell;
-  vertical-align: middle;
 }
 
 .background {
@@ -45,15 +42,16 @@ body {
 }
 
 .container {
-  position: relative;
-  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   text-align: center;
   padding: 40px;
   box-shadow: 0 0 40px #0000005d;
-  width: 400px;
 }
 
 table,
