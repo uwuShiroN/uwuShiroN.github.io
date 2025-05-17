@@ -22,11 +22,11 @@ html {
 }
 
 body {
-  margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   background: url('background.jpg') no-repeat center center fixed;
   background-size: cover;
+  font-family: Arial, sans-serif;
 }
 
 .background {
@@ -39,34 +39,47 @@ body {
   background-size: cover;
 }
 
-@media screen and (orientation: landscape) {
-  .container {
-    width: 80vw;
-    padding: 3vw;
-    font-size: 3vw;
-  }
-}
-
-@media screen and (orientation: portrait) {
-  .container {
-    width: 90vw;
+@media screen and (max-width: 768px) {
+  body {
+    display: block;
     padding: 5vw;
-    font-size: 4vw;
+  }
+
+  .container {
+    width: 90vmin;
+    height: auto;
+    min-height: 90vmin;
+    max-width: none;
+    padding: 5vmin;
+    border-radius:
+    margin: 5vmin auto;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 4vmin rgba(0, 0, 0, 0.4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  table, th, td {
+    font-size: 4vmin;
+  }
+
+  .icon {
+    width: 6vmin;
+    height: 6vmin;
+    margin: 0 1vmin;
   }
 }
 
-table,
-th,
-td {
-  text-align: center;
-  font-size: 2.08vw;
-  color: white;
-  border-color: white;
-}
-
-.icon {
-  width: 2.5vw;
-  height: 2.5vw;
-  position: relative;
-  margin: 0 0.52vw;
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .container {
+    width: 70vmin;
+    height: 70vmin;
+  }
+  
+  table, th, td {
+    font-size: 3vmin;
+  }
 }
