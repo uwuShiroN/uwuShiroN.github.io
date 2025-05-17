@@ -6,11 +6,9 @@ a {
 a:hover {
   color: transparent;
 }
-
 a:visited {
   color: pink;
 }
-
 a:active {
   color: yellow;
 }
@@ -33,10 +31,10 @@ body {
 
 .background {
   position: absolute;
-  top: -10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
+  top: -10vh;
+  left: -10vw;
+  width: 120vw;
+  height: 120vh;
   background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center;
   background-size: cover;
 }
@@ -46,27 +44,26 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 15px;
+  border-radius: 0.78vw; /* ≈ 15px */
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   text-align: center;
-  padding: 40px;
-  box-shadow: 0 0 40px #0000005d;
+  padding: 2.08vw; /* ≈ 40px */
+  box-shadow: 0 0 2.08vw #0000005d; /* ≈ 40px */
 }
 
 table,
 th,
 td {
   text-align: center;
-  font-size: 40px;
+  font-size: 2.08vw; /* ≈ 40px */
   color: white;
   border-color: white;
 }
 
 .icon {
-  width: 48px;
-  height: 48px;
+  width: 2.5vw;  /* ≈ 48px */
+  height: 2.5vw;
   position: relative;
-  margin: 0 10px;
-  transition: transform 0.05s ease;
+  margin: 0 0.52vw;  /* ≈ 10px */
 }
