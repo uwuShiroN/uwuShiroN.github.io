@@ -27,7 +27,7 @@ body {
   margin: 0;
   height: 100vh;
   overflow: hidden;
-  background: url('background.jpg') no-repeat center center fixed;
+  background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
   background-size: cover;
   position: relative;
   display: table-cell;
@@ -40,7 +40,7 @@ body {
   left: -10%;
   width: 120%;
   height: 120%;
-  background: url('background.jpg') no-repeat center center;
+  background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center;
   background-size: cover;
 }
 
