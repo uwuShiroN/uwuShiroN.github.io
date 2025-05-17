@@ -2,8 +2,14 @@
 <html>
 <head>
   <title>ShiroN's Garden</title>
-  <link rel="icon" href="https://scontent.ftpe8-1.fna.fbcdn.net/v/t39.30808-1/480317259_9682292628455911_4191179823998271023_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=108&ccb=1-7&_nc_sid=1d2534&_nc_ohc=9HyLFq_EZkUQ7kNvwHrFdiO&_nc_oc=AdmV9DtRrAvYbxECaO9KreaPA1M6rq3GN1RNJJxxCTyY0FYMVrI3KTYZzyhi8gosOMI&_nc_zt=24&_nc_ht=scontent.ftpe8-1.fna&_nc_gid=zY8FLjzyH0E2q_o7g_HWHg&oh=00_AfHUyWnfXCXaAiIs2KZitKa_aTEpT3naKYmSlVwZqW1qQQ&oe=67F9DB83" />
-  <link rel="stylesheet" type="text/css" href="CSS.css" />
+  <script>
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = isMobile ? 'mobile.css' : 'desktop.css';
+    document.head.appendChild(link);
+  </script>
 </head>
 <body>
   <div class="background" id="bg"></div>
@@ -40,11 +46,11 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (isMobile) {
-          console.log("Mobile detected - skipping animation scripts.");
-          return;
-          }
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+      console.log("Mobile detected - skipping animation scripts.");
+      return;
+      }
 
       // 背景動畫
       const bg = document.getElementById('bg');
