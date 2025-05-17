@@ -27,6 +27,10 @@ body {
   background: url('background.jpg') no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .background {
@@ -41,18 +45,19 @@ body {
 
 @media screen and (max-width: 768px) {
   body {
-    display: block;
-    padding: 5vw;
+    display: flex !important;
+    padding: 10px;
   }
 
   .container {
-    width: 90vmin;
+    width: 90vw;
+    max-width: 500px;
     height: auto;
-    min-height: 90vmin;
-    max-width: none;
-    padding: 5vmin;
-    border-radius:
-    margin: 5vmin auto;
+    min-height: 60vh;
+    padding: 6vw;
+    border-radius: 4vw;
+    margin: 0 auto;
+    font-size: 1.2rem;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 0 4vmin rgba(0, 0, 0, 0.4);
@@ -63,23 +68,31 @@ body {
   }
 
   table, th, td {
-    font-size: 4vmin;
+    font-size: 1.5rem !important;
   }
 
   .icon {
-    width: 6vmin;
-    height: 6vmin;
-    margin: 0 1vmin;
+    width: 8vw;
+    height: 8vw;
+    min-width: 24px;
+    min-height: 24px;
+    margin: 0 2vw;
   }
 }
 
 @media screen and (max-width: 768px) and (orientation: landscape) {
   .container {
-    width: 70vmin;
-    height: 70vmin;
+    width: 70vw;
+    height: 70vh;
+    max-width: 600px;
   }
   
   table, th, td {
-    font-size: 3vmin;
+    font-size: 1.2rem !important;
+  }
+  
+  .icon {
+    width: 6vw;
+    height: 6vw;
   }
 }
