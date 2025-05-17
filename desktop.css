@@ -44,19 +44,19 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 0.78vw; /* ≈ 15px */
+  border-radius: 0.78vw; /* 15px */
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   text-align: center;
-  padding: 2.08vw; /* ≈ 40px */
-  box-shadow: 0 0 2.08vw #0000005d; /* ≈ 40px */
+  padding: 2.08vw; /* 40px */
+  box-shadow: 0 0 2.08vw #0000005d; /* 40px */
 }
 
 table,
 th,
 td {
   text-align: center;
-  font-size: 2.08vw; /* ≈ 40px */
+  font-size: 2.08vw; /* 40px */
   color: white;
   border-color: white;
 }
