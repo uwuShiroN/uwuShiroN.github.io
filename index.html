@@ -40,7 +40,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (isMobile) {
           console.log("Mobile detected - skipping animation scripts.");
           return;
