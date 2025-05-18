@@ -46,12 +46,16 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 15px;
+  border-radius: 0.78vw;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   text-align: center;
-  padding: 40px;
-  box-shadow: 0 0 40px #0000005d;
+  padding: 2.08vw;
+  box-shadow: 0 0 2.08vw #0000005d;
+  width: auto;
+  min-width: 15vw;
+  max-width: 90vw;
+  white-space: nowrap;
 }
 
 table,
@@ -62,6 +66,12 @@ td {
   color: white;
   border-color: white;
 }
+table {
+  width: auto;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0.52vw;
+}
 
 .icon {
   width: 48px;
@@ -69,4 +79,25 @@ td {
   position: relative;
   margin: 0 10px;
   transition: transform 0.05s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+
+td {
+  padding: 0.5vw;
+  min-width: 5vw;
+}
+
+@media (max-width: 768px) {
+  .icon {
+    width: 8vmin;
+    height: 8vmin;
+  }
+  
+  .container {
+    padding: 3vmin;
+    border-radius: 2vmin;
+  }
 }
