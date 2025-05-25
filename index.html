@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="icon" href="https://lh4.googleusercontent.com/z2kChG1bJ-1iNSc7DCTmBbzlPYbJdbEYTfXuZLVUlEbX02o3w_5s3ee-9hJHsNFyhntJh7e4ij3kxdQQe19jPsfm-SSbSEb3XMKmLtj6oQwCOyX9">
-  <title>ShiroN's Garden</title>
-  <script>
-    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = isMobile ? 'mobile.css' : 'desktop.css';
-    document.head.appendChild(link);
-  </script>
-</head>
-<body>
-  <div class="background" id="bg"></div>
-  <div class="container" style="text-align: center;">
-    <table style="width:100%">
-      <tr>
-        <th><img id="ProfilePicture" src="https://i.imgur.com/VO4jg25.gif" width="200px" height="200px" style="border-radius: 15px; max-width:100%; height:auto;" /></th>
-      </tr>
-      <tr>
-        <th><p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700; text-shadow: 0 0 10px #4949498c, 0 0 50px">ShiroN</p></th>
-      </tr>
-      <tr>
-        <th>
-          <a href="https://www.youtube.com/@uwuShiroN">
-            <img class="icon" src="https://img.icons8.com/?size=100&id=44112&format=png&color=000000">
-          </a>
-          <a href="https://discord.gg/FBPGSRhFbV">
-            <img class="icon" src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000">
-          </a>
-          <a href="https://x.com/uwuShiroN">
-            <img class="icon" src="https://img.icons8.com/?size=100&id=bG29Ckcdp6YP&format=png&color=000000">
-          </a>
-          <a href="https://www.instagram.com/uwushiron/">
-            <img class="icon" src="https://img.icons8.com/?size=100&id=43625&format=png&color=000000">
-          </a>
-          <a href="https://www.facebook.com/uwushiron">
-            <img class="icon" src="https://img.icons8.com/?size=100&id=118501&format=png&color=000000">
-          </a>
-        </th>
-      </tr>
-    </table>
-  </div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="ShiroN's Garden">
+    <link rel="icon" href="https://lh4.googleusercontent.com/z2kChG1bJ-1iNSc7DCTmBbzlPYbJdbEYTfXuZLVUlEbX02o3w_5s3ee-9hJHsNFyhntJh7e4ij3kxdQQe19jPsfm-SSbSEb3XMKmLtj6oQwCOyX9">
+    <title>ShiroN's Garden</title>
+    <script>
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = isMobile ? 'mobile.css' : 'desktop.css';
+      document.head.appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="background" id="bg"></div>
+    <div class="container" style="text-align: center;">
+      <table style="width:100%">
+        <tr>
+          <th><img id="ProfilePicture" src="https://i.imgur.com/VO4jg25.gif" width="200px" height="200px" style="border-radius: 15px; max-width:100%; height:auto; ;" /></th>
+        </tr>
+        <tr>
+          <th><p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;">ShiroN</p></th>
+        </tr>
+        <tr>
+          <th>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+              <a href="https://www.youtube.com/@uwuShiroN">
+                <img class="icon" src="https://img.icons8.com/?size=100&id=44112&format=png&color=000000">
+              </a>
+              <a href="https://discord.gg/FBPGSRhFbV">
+                <img class="icon" src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000">
+              </a>
+              <a href="https://x.com/uwuShiroN">
+                <img class="icon" src="https://img.icons8.com/?size=100&id=bG29Ckcdp6YP&format=png&color=000000">
+              </a>
+              <a href="https://www.instagram.com/uwushiron/">
+                <img class="icon" src="https://img.icons8.com/?size=100&id=43625&format=png&color=000000">
+              </a>
+              <a href="https://www.facebook.com/uwushiron">
+                <img class="icon" src="https://img.icons8.com/?size=100&id=118501&format=png&color=000000">
+              </a>
+            </div>
+          </th>
+        </tr>
+      </table>
+    </div>
   <script src="script.js"></script>
-</body>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+
+      <!-- Brand -->
+      <div class="footer-column">
+        <h3>ShiroN</h3>
+        <p>Digital artist sharing illustrations and visual stories.</p>
+      </div>
+
+      <!-- Social Links -->
+      <div class="footer-column">
+        <h3>Other Links</h3>
+        <div class="social-icons">
+          <a href="https://www.youtube.com/playlist?list=PLV_a83IjJKiAEqJUU3SpphjhYQVsif4Ug" target="_blank"><i class="fab fa-twitter">Youtube Music List</i></a>
+          <br><a href="https://github.com/uwuShiroN" target="_blank"><i class="fab fa-github">Github</i></a>
+          <br><a href="https://sites.google.com/view/uwushiron/" target="_blank"><i class="fab fa-artstation">GoogleSites</i></a>
+        </div>
+      </div>
+
+      <!-- Artworks -->
+      <div class="footer-column">
+        <h3>My Artworks</h3>
+        <div class="art-gallery">
+          <img src="https://scontent.ftpe8-4.fna.fbcdn.net/v/t39.30808-6/499639272_24117034671221800_8191819413468897475_n.jpg?stp=dst-jpg_s720x720_tt6&_nc_cat=110&ccb=1-7&_nc_sid=f727a1&_nc_ohc=FYynbkAp6kcQ7kNvwEWDW_B&_nc_oc=Admzqb5xQ1270LwjhoPgS-oYtRyg3dfmfo86uijrI2bwe_pk4ihK1q8qz93NpauhZ58&_nc_zt=23&_nc_ht=scontent.ftpe8-4.fna&_nc_gid=lQcpeWxazfNeNhb1yibNmQ&oh=00_AfJ20lWUVvL5lo9YiW2hxQY_haARdl9tbsuRvt__789TXg&oe=6838EC02" alt="Artwork 1">
+        <!-- 
+          <img src="https://via.placeholder.com/100" alt="Artwork 2">
+          <img src="https://via.placeholder.com/100" alt="Artwork 3">
+        -->
+          <p> More Artworks Coming Soon...</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 ShiroN. All rights reserved.
+    </div>
+  </footer>
+  </body>
 </html>
