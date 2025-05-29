@@ -1,187 +1,184 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // detect mobile，load css
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = isMobile ? 'mobile.css' : 'desktop.css';
+  document.head.appendChild(link);
+
+  // DOM
+  const footer = document.querySelector('footer');
+  const arrowUp = document.getElementById('arrowUp');
+
+  // mobile script
   if (isMobile) {
+    let footerShown = false;
+    function updateArrowPosition() {
+      if (!arrowUp || !footer) return;
+      if (footerShown) {
+        arrowUp.style.transform = 'translateX(-50%) rotate(180deg)';
+        const footerHeight = footer.offsetHeight;
+        arrowUp.style.bottom = `${footerHeight + 20}px`;
+      } else {
+        arrowUp.style.transform = 'translateX(-50%) rotate(0deg)';
+        arrowUp.style.bottom = `20px`;
+      }
+    }
+    function handleArrowClick() {
+      if (!footer) return;
+      footerShown = !footerShown;
+      if (footerShown) {
+        footer.classList.add('show');
+      } else {
+        footer.classList.remove('show');
+      }
+      updateArrowPosition();
+    }
+    if (arrowUp) arrowUp.addEventListener('click', handleArrowClick);
+    window.addEventListener('resize', () => {
+      if (footerShown && footer) {
+        const footerHeight = footer.offsetHeight;
+        document.documentElement.style.setProperty('--footer-height', `${footerHeight}px`);
+      }
+    });
     return;
   }
 
+  // desktop script
   const bg = document.getElementById('bg');
   const icons = document.querySelectorAll('.icon');
   const table = document.querySelector('table');
-  const footer = document.querySelector('footer');
+  if (!table || icons.length === 0 || !footer || !bg) return;
 
-  if (!table || icons.length === 0 || !footer || !bg) {
-    return;
-  }
-
+  // --- 背景動畫 ---
   let bgTargetX = 0, bgTargetY = 0;
   let bgCurrentX = 0, bgCurrentY = 0;
-  let animationFrameId = null;
-  let isMouseActive = false;
-  let isMouseOnFooter = false;
-  let mouseX = 0;
-  let footerShown = false;
-  
-  const tableBounds = table.getBoundingClientRect();
-  
-  const iconData = Array.from(icons).map(icon => {
-    const rect = icon.getBoundingClientRect();
-    return {
-      element: icon,
-      center: rect.left - tableBounds.left + rect.width / 2,
-      currentX: 0,
-      currentY: 0,
-      currentScale: 1,
-      targetX: 0,
-      targetY: 0,
-      targetScale: 1
-    };
-  });
 
-  const CONFIG = {
-    bgParallaxIntensity: 100,
-    iconHoverDistance: 100,
-    iconLiftAmount: 20,
-    iconScaleAmount: 0.5,
-    bgReturnSpeed: 0.008,
-    bgFollowSpeed: 0.02,
-    iconReturnSpeed: 0.1,
-    iconFollowSpeed: 0.3
-  };
-
-  function resetAnimations() {
-    bgTargetX = 0;
-    bgTargetY = 0;
-    mouseX = -1000;
-    iconData.forEach(data => {
-      data.targetX = 0;
-      data.targetY = 0;
-      data.targetScale = 1;
-    });
-  }
-
-  let lastMouseMoveTime = 0;
-  const mouseMoveThrottle = 16;
-
-  function handleMouseMove(e) {
-    const now = Date.now();
-    if (now - lastMouseMoveTime < mouseMoveThrottle) return;
-    lastMouseMoveTime = now;
-
-    if (!isMouseActive) isMouseActive = true;
-    if (isMouseOnFooter) return;
-
+  function handleBgMouseMove(e) {
     const x = e.clientX / window.innerWidth - 0.5;
     const y = e.clientY / window.innerHeight - 0.5;
-    bgTargetX = x * -CONFIG.bgParallaxIntensity;
-    bgTargetY = y * -CONFIG.bgParallaxIntensity;
-    mouseX = e.clientX - tableBounds.left;
+    bgTargetX = x * -100;
+    bgTargetY = y * -100;
   }
 
   function animateBackground() {
-    const speed = (bgTargetX === 0 && bgTargetY === 0) ? CONFIG.bgReturnSpeed : CONFIG.bgFollowSpeed;
-    
-    if (!isMouseActive || isMouseOnFooter) {
-      bgTargetX = 0;
-      bgTargetY = 0;
-    }
-    
-    bgCurrentX += (bgTargetX - bgCurrentX) * speed;
-    bgCurrentY += (bgTargetY - bgCurrentY) * speed;
-    
-    bg.style.willChange = 'transform';
+    bgCurrentX += (bgTargetX - bgCurrentX) * 0.02;
+    bgCurrentY += (bgTargetY - bgCurrentY) * 0.02;
+    // 極小直接歸零
+    if (Math.abs(bgCurrentX) < 0.01) bgCurrentX = 0;
+    if (Math.abs(bgCurrentY) < 0.01) bgCurrentY = 0;
     bg.style.transform = `translate(${bgCurrentX}px, ${bgCurrentY}px)`;
   }
 
+  // --- Icon 動畫 ---
+  let mouseX = 0;
+  const targetTransforms = Array.from(icons).map(() => ({ x: 0, y: 0, scale: 1 }));
+  const currentTransforms = Array.from(icons).map(() => ({ x: 0, y: 0, scale: 1 }));
+
+  function handleIconMouseMove(e) {
+    const bounds = table.getBoundingClientRect();
+    mouseX = e.clientX - bounds.left;
+  }
+
   function animateIcons() {
-    iconData.forEach(data => {
-      const distance = Math.abs(mouseX - data.center);
-      
-      if (isMouseActive && !isMouseOnFooter && distance < CONFIG.iconHoverDistance) {
-        const influence = 1 - (distance / CONFIG.iconHoverDistance);
-        data.targetY = -influence * CONFIG.iconLiftAmount;
-        data.targetScale = 1 + influence * CONFIG.iconScaleAmount;
-      } else {
-        data.targetY = 0;
-        data.targetScale = 1;
-      }
-      
-      const speed = (data.targetX === 0 && data.targetY === 0 && data.targetScale === 1) 
-        ? CONFIG.iconReturnSpeed 
-        : CONFIG.iconFollowSpeed;
-      
-      data.currentX += (data.targetX - data.currentX) * speed;
-      data.currentY += (data.targetY - data.currentY) * speed;
-      data.currentScale += (data.targetScale - data.currentScale) * speed;
-      
-      data.element.style.willChange = 'transform';
-      data.element.style.transform = 
-        `translate(${data.currentX}px, ${data.currentY}px) scale(${data.currentScale})`;
+    const bounds = table.getBoundingClientRect();
+
+    icons.forEach((img, i) => {
+      const iconRect = img.getBoundingClientRect();
+      const iconCenter = iconRect.left - bounds.left + iconRect.width / 2;
+      const distance = mouseX - iconCenter;
+      const influence = Math.max(0, 1 - Math.abs(distance) / 150);
+      const scale = 1 + influence * 0.5;
+      const y = 0;
+      const x = 0;
+
+      targetTransforms[i] = { x, y, scale };
+    });
+
+    icons.forEach((img, i) => {
+      const target = targetTransforms[i];
+      const current = currentTransforms[i];
+
+      current.x += (target.x - current.x) * 0.3;
+      current.y += (target.y - current.y) * 0.3;
+      current.scale += (target.scale - current.scale) * 0.5;
+      if (Math.abs(current.x - target.x) < 0.01) current.x = target.x;
+      if (Math.abs(current.y - target.y) < 0.01) current.y = target.y;
+      if (Math.abs(current.scale - target.scale) < 0.001) current.scale = target.scale;
+
+      img.style.transform = `translate(${current.x}px, ${current.y}px) scale(${current.scale})`;
+      img.style.transformOrigin = 'center bottom';
     });
   }
 
-  function animateAll() {
-    animateBackground();
-    animateIcons();
-    
-    if (isMouseActive || 
-        bgCurrentX !== 0 || bgCurrentY !== 0 || 
-        iconData.some(data => data.currentX !== 0 || data.currentY !== 0 || data.currentScale !== 1)) {
-      animationFrameId = requestAnimationFrame(animateAll);
+  // --- Footer/箭頭 ---
+  let isMouseOnFooter = false;
+  let footerShown = false;
+  let animationFrameId = null;
+
+  function updateArrowPosition() {
+    if (!arrowUp) return;
+    if (footerShown) {
+      arrowUp.style.transform = 'translateX(-50%) rotate(180deg)';
+      const footerHeight = footer.offsetHeight;
+      arrowUp.style.bottom = `${footerHeight + 20}px`;
     } else {
-      animationFrameId = null;
+      arrowUp.style.transform = 'translateX(-50%) rotate(0deg)';
+      arrowUp.style.bottom = `20px`;
     }
   }
-
-  function handleMouseEnter() {
-    if (!isMouseActive) {
-      isMouseActive = true;
-      if (!animationFrameId) {
-        animateAll();
-      }
+  function handleArrowClick() {
+    footerShown = !footerShown;
+    if (footerShown) {
+      footer.classList.add('show');
+    } else {
+      footer.classList.remove('show');
     }
+    updateArrowPosition();
   }
-
-  function handleMouseLeave() {
-    isMouseActive = false;
-    resetAnimations();
-  }
-
-  function handleFooterMouseEnter() {
-    isMouseOnFooter = true;
-    resetAnimations();
-  }
-
-  function handleFooterMouseLeave() {
-    isMouseOnFooter = false;
-  }
-
-  const passiveOptions = { passive: true };
-  document.addEventListener('mouseenter', handleMouseEnter, true);
-  document.addEventListener('mouseleave', handleMouseLeave, true);
-  document.addEventListener('mousemove', handleMouseMove, passiveOptions);
-  footer.addEventListener('mouseenter', handleFooterMouseEnter);
-  footer.addEventListener('mouseleave', handleFooterMouseLeave);
-
   function showFooterOnce() {
     if (!footerShown) {
       footer.classList.add('show');
       footerShown = true;
+      updateArrowPosition();
     }
   }
-
   function hideFooter() {
     if (footerShown) {
       footer.classList.remove('show');
       footerShown = false;
+      updateArrowPosition();
     }
   }
+  function handleFooterMouseEnter() {
+    isMouseOnFooter = true;
+    resetAnimations();
+    currentTransforms.forEach((trans, i) => {
+      trans.x = 0;
+      trans.y = 0;
+      trans.scale = 1;
+      icons[i].style.transform = `scale(1)`;
+    });
+  }
+  function handleFooterMouseLeave() {
+    isMouseOnFooter = false;
+  }
 
+  function resetAnimations() {
+    bgTargetX = 0;
+    bgTargetY = 0;
+    targetTransforms.forEach(t => {
+      t.x = 0;
+      t.y = 0;
+      t.scale = 1;
+    });
+  }
+
+  // --- scroll, wheel, keydown for footer ---
   let lastScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
   let scrollTimeout = null;
-
   function handleScroll() {
     const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       if (currentScrollPosition > lastScrollPosition) {
@@ -193,6 +190,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 50);
   }
 
+  // --- listeners ---
+  const passiveOptions = { passive: true };
+  document.addEventListener('mousemove', handleBgMouseMove, passiveOptions);
+  document.addEventListener('mousemove', handleIconMouseMove, passiveOptions);
+  document.addEventListener('mouseleave', resetAnimations, true);
+  if (footer) {
+    footer.addEventListener('mouseenter', handleFooterMouseEnter);
+    footer.addEventListener('mouseleave', handleFooterMouseLeave);
+  }
+  if (arrowUp) arrowUp.addEventListener('click', handleArrowClick);
+  window.addEventListener('resize', () => {
+    if (footerShown) {
+      const footerHeight = footer.offsetHeight;
+      document.documentElement.style.setProperty('--footer-height', `${footerHeight}px`);
+    }
+  });
   window.addEventListener('scroll', handleScroll, passiveOptions);
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
@@ -201,7 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hideFooter();
     }
   }, passiveOptions);
-
   window.addEventListener('wheel', (e) => {
     if (e.deltaY > 0) {
       showFooterOnce();
@@ -209,6 +221,13 @@ document.addEventListener('DOMContentLoaded', () => {
       hideFooter();
     }
   }, passiveOptions);
+
+    // --- animate all ---
+  function animateAll() {
+    animateBackground();
+    animateIcons();
+    animationFrameId = requestAnimationFrame(animateAll);
+  }
 
   animateAll();
 });
