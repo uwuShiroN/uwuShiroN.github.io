@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Icon 動畫 ---
-  let mouseX = 0;
+  let mouseX = null; // 修正：預設為null，避免載入時icon被誤判
   const targetTransforms = Array.from(icons).map(() => ({ x: 0, y: 0, scale: 1 }));
   const currentTransforms = Array.from(icons).map(() => ({ x: 0, y: 0, scale: 1 }));
 
@@ -84,14 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const bounds = table.getBoundingClientRect();
 
     icons.forEach((img, i) => {
-      const iconRect = img.getBoundingClientRect();
-      const iconCenter = iconRect.left - bounds.left + iconRect.width / 2;
-      const distance = mouseX - iconCenter;
-      const influence = Math.max(0, 1 - Math.abs(distance) / 150);
-      const scale = 1 + influence * 0.5;
-      const y = 0;
-      const x = 0;
-
+      let scale = 1, x = 0, y = 0;
+      if (mouseX !== null) {
+        const iconRect = img.getBoundingClientRect();
+        const iconCenter = iconRect.left - bounds.left + iconRect.width / 2;
+        const distance = mouseX - iconCenter;
+        const influence = Math.max(0, 1 - Math.abs(distance) / 150);
+        scale = 1 + influence * 0.5;
+      }
       targetTransforms[i] = { x, y, scale };
     });
 
@@ -167,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetAnimations() {
     bgTargetX = 0;
     bgTargetY = 0;
+    mouseX = null; // 滑鼠離開時設為null
     targetTransforms.forEach(t => {
       t.x = 0;
       t.y = 0;
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, passiveOptions);
 
-    // --- animate all ---
+  // --- animate all ---
   function animateAll() {
     animateBackground();
     animateIcons();
