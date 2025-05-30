@@ -5,42 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="ShiroN's Garden">
     <link rel="icon" href="https://lh4.googleusercontent.com/z2kChG1bJ-1iNSc7DCTmBbzlPYbJdbEYTfXuZLVUlEbX02o3w_5s3ee-9hJHsNFyhntJh7e4ij3kxdQQe19jPsfm-SSbSEb3XMKmLtj6oQwCOyX9">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RXf+QSDCUQs5WcU0tcTlt0d3Z+UxdDZkq3LO+V0+ZDbG1zD8I77dG8A+7sZDWYutk5g+tuY3+LM5fIbVbE4w1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>ShiroN's Garden</title>
   </head>
-  <body>
-    <div class="background" id="bg"></div>
-    <div class="container" style="text-align: center;">
-      <table style="width:100%">
-        <tr>
-          <th><img id="ProfilePicture" src="https://i.imgur.com/VO4jg25.gif" width="200px" height="200px" style="border-radius: 15px; max-width:100%; height:auto; ;" /></th>
-        </tr>
-        <tr>
-          <th><p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;">ShiroN</p></th>
-        </tr>
-        <tr>
-          <th>
-            <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-              <a href="https://www.youtube.com/@uwuShiroN">
-                <img class="icon" src="https://img.icons8.com/?size=100&id=44112&format=png&color=000000">
-              </a>
-              <a href="https://discord.gg/FBPGSRhFbV">
-                <img class="icon" src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000">
-              </a>
-              <a href="https://x.com/uwuShiroN">
-                <img class="icon" src="https://img.icons8.com/?size=100&id=bG29Ckcdp6YP&format=png&color=000000">
-              </a>
-              <a href="https://www.instagram.com/uwushiron/">
-                <img class="icon" src="https://img.icons8.com/?size=100&id=43625&format=png&color=000000">
-              </a>
-              <a href="https://www.facebook.com/uwushiron">
-                <img class="icon" src="https://img.icons8.com/?size=100&id=118501&format=png&color=000000">
-              </a>
-            </div>
-          </th>
-        </tr>
-      </table>
-    </div>
+  <!-- load css, js -->
   <script src="script.js"></script>
+  <body>
+  <!-- nav bar -->
+  <nav class="navbar">
+  <div class="logo">
+    <a href="#" class="menu-link" onclick="closeNews(); setActive(this); return false;">ShiroN's Garden</a>
+  </div>
+  <div class="menu" id="navMenu">
+    <a href="#home" class="menu-link active" id="home-link" onclick="closeNews(); setActive(this);"> <i class="fas fa-house"></i> Home</a>
+    <a href="#news" class="menu-link" onclick="openNews(); setActive(this); return false;">News</a>
+    <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeNews(); setActive(this);"><i class="fas fa-user"></i> GoogleSites</a>
+  </div>
+</nav>
+
+  <script>
+    function setActive(element) {
+      document.querySelectorAll('.menu-link').forEach(function(link) {
+        link.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+
+    function openNews() {
+      document.getElementById("myNews").style.width = "100%";
+    }
+
+    function closeNews() {
+      document.getElementById("myNews").style.width = "0%";
+      // Set Home as active again
+      var homeLink = document.getElementById('home-link');
+      setActive(homeLink);
+    }
+
+    // Ensure Home is active on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      var homeLink = document.getElementById('home-link');
+      setActive(homeLink);
+    });
+  </script>
+  
+  <!-- News -->
+  <div id="myNews" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNews()">&times;</a>
+    <div class="overlay-content">
+      <a href="#">WIP</a>
+      <a href="#">...</a>
+      <a href="#">...</a>
+      <a href="#">More Coming soon...</a>
+    </div>
+  </div>
+  <div class="background" id="bg"></div>
+
+  <!-- container -->
+    <div class="center-wrapper">
+      <div class="container">
+        <table style="width:100%">
+          <tr>
+            <th>
+              <div class="ProfilePicture">
+                <img id="ProfilePicture" src="https://i.imgur.com/VO4jg25.gif" width="200px" height="200px" />
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <th><p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3);">ShiroN</p></th>
+          </tr>
+          <tr>
+            <th>
+              <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <a href="https://www.youtube.com/@uwuShiroN">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=44112&format=png&color=000000">
+                </a>
+                <a href="https://discord.gg/FBPGSRhFbV">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000">
+                </a>
+                <a href="https://x.com/uwuShiroN">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=bG29Ckcdp6YP&format=png&color=000000">
+                </a>
+                <a href="https://www.instagram.com/uwushiron/">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=43625&format=png&color=000000">
+                </a>
+                <a href="https://www.facebook.com/uwushiron">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=118501&format=png&color=000000">
+                </a>
+              </div>
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
 
   <!-- Footer -->
   <footer>
