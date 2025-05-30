@@ -1,3 +1,42 @@
+// --- GLOBALS ---
+let footerShown = false;
+let arrowUp = null;
+
+// --- Footer Hide/Show Functions ---
+function hideFooter() {
+  const footer = document.querySelector('footer');
+  if (footer && footer.classList.contains('show')) {
+    footer.classList.remove('show');
+    footerShown = false;
+    updateArrowPosition();
+  }
+}
+
+function showFooter() {
+  const footer = document.querySelector('footer');
+  if (footer && !footer.classList.contains('show')) {
+    footer.classList.add('show');
+    footerShown = true;
+    updateArrowPosition();
+  }
+}
+
+function updateArrowPosition() {
+  if (!arrowUp) arrowUp = document.getElementById('arrowUp');
+  if (!arrowUp) return;
+  if (footerShown) {
+    arrowUp.style.transform = 'translateX(-50%) rotate(180deg)';
+    const footer = document.querySelector('footer');
+    if (footer) {
+      const footerHeight = footer.offsetHeight;
+      arrowUp.style.bottom = `${footerHeight + 20}px`;
+    }
+  } else {
+    arrowUp.style.transform = 'translateX(-50%) rotate(0deg)';
+    arrowUp.style.bottom = `20px`;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // detect mobile，load css
   const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -7,13 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.head.appendChild(link);
 
   // DOM
+  arrowUp = document.getElementById('arrowUp');
   const footer = document.querySelector('footer');
-  const arrowUp = document.getElementById('arrowUp');
 
   // mobile script
   if (isMobile) {
-    let footerShown = false;
-    function updateArrowPosition() {
+    function updateArrowPositionMobile() {
       if (!arrowUp || !footer) return;
       if (footerShown) {
         arrowUp.style.transform = 'translateX(-50%) rotate(180deg)';
@@ -32,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         footer.classList.remove('show');
       }
-      updateArrowPosition();
+      updateArrowPositionMobile();
     }
     if (arrowUp) arrowUp.addEventListener('click', handleArrowClick);
     window.addEventListener('resize', () => {
@@ -113,28 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Footer/箭頭 ---
   let isMouseOnFooter = false;
-  let footerShown = false;
   let animationFrameId = null;
 
-  function updateArrowPosition() {
-    if (!arrowUp) return;
-    if (footerShown) {
-      arrowUp.style.transform = 'translateX(-50%) rotate(180deg)';
-      const footerHeight = footer.offsetHeight;
-      arrowUp.style.bottom = `${footerHeight + 20}px`;
-    } else {
-      arrowUp.style.transform = 'translateX(-50%) rotate(0deg)';
-      arrowUp.style.bottom = `20px`;
-    }
-  }
   function handleArrowClick() {
-    footerShown = !footerShown;
     if (footerShown) {
-      footer.classList.add('show');
+      hideFooter();
     } else {
-      footer.classList.remove('show');
+      showFooter();
     }
-    updateArrowPosition();
   }
   function showFooterOnce() {
     if (!footerShown) {
@@ -143,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateArrowPosition();
     }
   }
-  function hideFooter() {
+  function hideFooterInternal() {
     if (footerShown) {
       footer.classList.remove('show');
       footerShown = false;
@@ -185,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentScrollPosition > lastScrollPosition) {
         showFooterOnce();
       } else if (currentScrollPosition < lastScrollPosition) {
-        hideFooter();
+        hideFooterInternal();
       }
       lastScrollPosition = currentScrollPosition <= 0 ? 0 : currentScrollPosition;
     }, 50);
@@ -210,14 +234,14 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScroll, passiveOptions);
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
-      showFooterOnce();
+      showFooter();
     } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
       hideFooter();
     }
   }, passiveOptions);
   window.addEventListener('wheel', (e) => {
     if (e.deltaY > 0) {
-      showFooterOnce();
+      showFooter();
     } else {
       hideFooter();
     }
@@ -231,4 +255,101 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   animateAll();
+
+  // --- Responsive Mobile Menu ---
+  const toggle = document.getElementById('mobileMenuToggle');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  const closeBtn = document.getElementById('closeMobileMenu');
+  const menuContent = document.getElementById('mobileMenuContent');
+  const desktopMenu = document.getElementById('navMenu');
+
+  function cloneDesktopLinks() {
+    menuContent.innerHTML = '';
+    const links = desktopMenu.querySelectorAll('.menu-link');
+    links.forEach(link => {
+      const clone = link.cloneNode(true);
+      clone.addEventListener('click', e => {
+        if (typeof link.onclick === "function") link.onclick.call(link, e);
+        overlay.classList.remove('active');
+        toggle.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+      menuContent.appendChild(clone);
+    });
+  }
+
+  function openMenu() {
+    cloneDesktopLinks();
+    overlay.classList.add('active');
+    toggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    overlay.classList.remove('active');
+    toggle.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    if (overlay.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+  closeBtn.addEventListener('click', closeMenu);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  function syncActiveLink() {
+    const desktopLinks = desktopMenu.querySelectorAll('.menu-link');
+    const mobileLinks = menuContent.querySelectorAll('.menu-link');
+    desktopLinks.forEach((d, i) => {
+      if (d.classList.contains('active')) {
+        mobileLinks[i]?.classList.add('active');
+      } else {
+        mobileLinks[i]?.classList.remove('active');
+      }
+    });
+  }
+  overlay.addEventListener('transitionend', syncActiveLink);
+
+  desktopMenu.addEventListener('click', () => {
+    setTimeout(syncActiveLink, 100);
+  });
+
+  // --- Home active on load ---
+  var homeLink = document.getElementById('home-link');
+  if (homeLink) setActive(homeLink);
+
+  // --- News open/close logic ---
+  window.setActive = setActive;
+  window.openNews = openNews;
+  window.closeNews = closeNews;
+  function setActive(element) {
+    document.querySelectorAll('.menu-link').forEach(function(link) {
+      link.classList.remove('active');
+    });
+    element.classList.add('active');
+  }
+  function openNews() {
+    document.getElementById("myNews").style.width = "100%";
+  }
+  function closeNews() {
+    document.getElementById("myNews").style.width = "0%";
+    // Set Home as active again
+    var homeLink = document.getElementById('home-link');
+    setActive(homeLink);
+  }
+
+  // Expose globally
+  window.hideFooter = hideFooter;
+  window.showFooter = showFooter;
+  window.updateArrowPosition = updateArrowPosition;
 });
