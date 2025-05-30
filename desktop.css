@@ -23,16 +23,12 @@ html {
 }
 
 body {
-  display: flex;
   justify-content: center;
-  align-items: flex-start; /* Changed from center to allow content to flow downward */
   flex-direction: column;
   margin: 0;
-  min-height: 100vh; /* Changed from height to allow expansion */
-  overflow: hidden; /* Changed from hidden to enable scrolling */
+  overflow: hidden; 
   background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
   background-size: cover;
-  
 }
 
 .background {
@@ -43,26 +39,36 @@ body {
   height: 120%;
   background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center;
   background-size: cover;
+  z-index: -1;
+}
+
+.center-wrapper {
+  min-height: calc(100vh - 100px); /* adjust 50px if navbar height changes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-  margin: 100px auto;
   border-radius: 0.78vw;
   background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
   text-align: center;
   align-items: center;
-  padding: 2.08vw;
-  box-shadow: 0 0 2.08vw #0000005d;
+  padding: 2vw;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
   min-width: 15vw;
   max-width: 90vw;
   white-space: nowrap;
-  position: relative;
-  flex-direction: column;
-  position: relative;
   transform: none;
-  top: auto;
-  left: auto;
+}
+
+.ProfilePicture img {
+  border-radius: 15px;
+  max-width: 100%;
+  height: auto;
+  border: 5px solid rgba(255,255,255,0.1);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
 }
 
 table,
@@ -75,21 +81,19 @@ td {
 }
 table {
   width: auto;
-  margin: 25 auto;
   border-collapse: separate;
-  border-spacing: 0.8vw;
 }
 
 .icon {
   width: 48px;
   height: 48px;
   position: relative;
-  margin: 10px 15px auto;
+  margin: 0px 10px;
   transition: transform 0.05s ease;
 }
 
 .icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
 
 th > a {
@@ -112,16 +116,11 @@ td {
   }
 }
 
-#ProfilePicture {
-  display: block;
-  margin: 0 auto;
-  box-shadow: 0 0 2.08vw #bdaffc5d;
-}
-
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f4f4;
+  padding-top: 60px;
 }
 
 footer {
@@ -218,6 +217,7 @@ footer.show {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 .arrow-up {
   position: fixed;
   left: 50%;
@@ -241,4 +241,136 @@ footer.show {
 footer.show ~ .arrow-up {
   bottom: calc(100% + 20px);
   transform: translateX(-50%) rotate(180deg);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(30, 30, 30, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar .logo a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar .menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar .menu a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+  color: white;
+}
+
+.navbar .menu a.active {
+  text-shadow: 0 0 10px #FFFFFF;
+  color: #FFFFFF;
+}
+
+.toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.toggle span {
+  height: 2px;
+  width: 22px;
+  background: #ccc;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+  .navbar .menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #1e1e1e;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 1rem;
+  }
+
+  .navbar .menu.open {
+    display: flex;
+  }
+
+  .toggle {
+    display: flex;
+  }
+}
+    
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+  font-size: 40px;
+  top: 15px;
+  right: 35px;
+  }
 }
