@@ -1,3 +1,13 @@
+body.loading > *:not(#white-flash):not(noscript) {
+  display: none !important;
+}
+footer {
+  display: none;
+}
+body.footer-ready footer {
+  display: block;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -22,7 +32,6 @@ html {
   tab-size: 4;
   background: url('YOUR_STATIC_IMAGE_URL') no-repeat center center fixed;
   background-size: cover;
-  
 }
 
 body {
@@ -45,7 +54,7 @@ body {
 }
 
 .center-wrapper {
-  min-height: calc(100vh - 100px); /* adjust 50px if navbar height changes */
+  min-height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,7 +187,7 @@ footer.show {
 }
 
 .social-icons a:hover {
-  color: #1da1f2; /* Twitter blue as example */
+  color: #1da1f2;
 }
 
 .art-gallery {
@@ -192,7 +201,7 @@ footer.show {
   height: auto;
   border-radius: 3px;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  object-fit: contain; /* ensures the image fits without cropping */
+  object-fit: contain;
 }
 
 .art-gallery img:hover {
@@ -273,7 +282,7 @@ footer.show ~ .arrow-up {
 .menu-item {
   display: flex;
   align-items: center;
-  gap: 8px; /* add space between logo and text */
+  gap: 8px;
   height: 100%;
 }
 .navbar .logo a {
@@ -291,7 +300,6 @@ footer.show ~ .arrow-up {
   align-items: center;
   gap: 1.5rem;
   z-index: 1003;
-  
 }
 
 .navbar .menu a {
@@ -436,7 +444,7 @@ footer.show ~ .arrow-up {
 
 .mobile-menu-overlay {
   position: fixed;
-  top: 56px; /* or your navbar height */
+  top: 56px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -455,7 +463,7 @@ footer.show ~ .arrow-up {
   position: absolute;
   top: 0;
   right: 0;
-  width: 260px;           /* adjust as needed */
+  width: 260px;
   max-width: 90vw;
   height: 100vh;
   background: rgba(30,30,30,0.96);
@@ -472,7 +480,6 @@ footer.show ~ .arrow-up {
   transform: translateX(0%);
 }
 
-/* Close X button */
 .close-mobile-menu {
   position: absolute;
   left: 12px;
@@ -497,7 +504,6 @@ footer.show ~ .arrow-up {
   gap: 1.5em;
 }
 
-/* Nav link styling in mobile menu */
 .mobile-menu-content a {
   font-size: 1.3em;
   color: #fff;
@@ -514,7 +520,6 @@ footer.show ~ .arrow-up {
   color: #ffb347;
 }
 
-/* Only show hamburger on mobile, hide desktop */
 @media (max-width: 900px) {
   .navbar .menu {
     display: none !important;
@@ -524,7 +529,6 @@ footer.show ~ .arrow-up {
   }
 }
 
-/* Hide hamburger on desktop */
 @media (min-width: 900px) {
   .mobile-menu-toggle, .mobile-menu-overlay {
     display: none !important;
