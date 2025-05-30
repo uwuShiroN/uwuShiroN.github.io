@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -9,76 +10,95 @@
     <link rel="icon" href="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RXf+QSDCUQs5WcU0tcTlt0d3Z+UxdDZkq3LO+V0+ZDbG1zD8I77dG8A+7sZDWYutk5g+tuY3+LM5fIbVbE4w1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>ShiroN's Garden</title>
+    <style>
+      #white-flash {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: linear-gradient(135deg, #111 0%, #111 100%);
+        z-index: 3000;
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 0.6s cubic-bezier(.4,0,.2,1);
+      }
+      #white-flash.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      body.loading > *:not(#white-flash):not(noscript) {
+        display: none !important;
+      }
+      footer {
+        display: none;
+      }
+      body.footer-ready footer {
+        display: block;
+      }
+    </style>
   </head>
-  <!-- load css, js -->
   <script src="script.js"></script>
-  <body>
-  <!-- nav bar -->
-  <nav class="navbar">
-  <div class="logo">
-    <div class="menu-item">
-      <img src="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true" width="40" height="40">
-      <a href="#" class="menu-link" ...>ShiroN's Garden</a>
+  <body class="loading">
+    <div id="loader">
+      <div class="spinner">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <span class="loader-text">Loading...</span>
     </div>
-  </div>
-  <div class="menu" id="navMenu">
-    <a href="#home" class="menu-link active" id="home-link" onclick="closeNews(); setActive(this); hideFooter();"> <i class="fas fa-house"></i>Home</a>
-    <a href="#news" class="menu-link" onclick="openNews(); setActive(this); hideFooter(); return false;">News</a>
-    <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeNews(); setActive(this); hideFooter();"><i class="fas fa-user"></i> GoogleSites</a>
-  </div>
-  <div class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" tabindex="0">
-  <span></span><span></span><span></span>
-</div>
-<!-- Mobile menu overlay -->
-<div class="mobile-menu-overlay" id="mobileMenuOverlay">
-  <div class="mobile-menu-box">
-    <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Close menu">&times;</button>
-    <div class="mobile-menu-content" id="mobileMenuContent">
-      <!-- JS will clone links here -->
-    </div>
-  </div>
-</div>
-</nav>
-
-  <script>
-    function setActive(element) {
-      document.querySelectorAll('.menu-link').forEach(function(link) {
-        link.classList.remove('active');
+    <div id="white-flash"></div>
+    <nav class="navbar">
+      <div class="logo">
+        <div class="menu-item">
+          <img src="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true" width="40" height="40">
+          <a href="#" class="menu-link">ShiroN's Garden</a>
+        </div>
+      </div>
+      <div class="menu" id="navMenu">
+        <a href="#home" class="menu-link active" id="home-link" onclick="closeNews(); setActive(this); hideFooter();"> <i class="fas fa-house"></i>Home</a>
+        <a href="#news" class="menu-link" onclick="openNews(); setActive(this); hideFooter(); return false;">News</a>
+        <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeNews(); setActive(this); hideFooter();"><i class="fas fa-user"></i> GoogleSites</a>
+      </div>
+      <div class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-box">
+          <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Close menu">&times;</button>
+          <div class="mobile-menu-content" id="mobileMenuContent"></div>
+        </div>
+      </div>
+    </nav>
+    <script>
+      function setActive(element) {
+        document.querySelectorAll('.menu-link').forEach(function(link) {
+          link.classList.remove('active');
+        });
+        element.classList.add('active');
+      }
+      function openNews() {
+        document.getElementById("myNews").style.width = "100%";
+      }
+      function closeNews() {
+        document.getElementById("myNews").style.width = "0%";
+        var homeLink = document.getElementById('home-link');
+        setActive(homeLink);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var homeLink = document.getElementById('home-link');
+        setActive(homeLink);
       });
-      element.classList.add('active');
-    }
-
-    function openNews() {
-      document.getElementById("myNews").style.width = "100%";
-    }
-
-    function closeNews() {
-      document.getElementById("myNews").style.width = "0%";
-      // Set Home as active again
-      var homeLink = document.getElementById('home-link');
-      setActive(homeLink);
-    }
-
-    // Ensure Home is active on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      var homeLink = document.getElementById('home-link');
-      setActive(homeLink);
-    });
-  </script>
-  
-  <!-- News -->
-  <div id="myNews" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNews()">&times;</a>
-    <div class="overlay-content">
-      <a href="#">WIP</a>
-      <a href="#">...</a>
-      <a href="#">...</a>
-      <a href="#">More Coming soon...</a>
+    </script>
+        <div id="myNews" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNews()">&times;</a>
+      <div class="overlay-content">
+        <a href="#">WIP</a>
+        <a href="#">...</a>
+        <a href="#">...</a>
+        <a href="#">More Coming soon...</a>
+      </div>
     </div>
-  </div>
-  <div class="background" id="bg"></div>
-
-  <!-- container -->
+    <div class="background" id="bg"></div>
     <div class="center-wrapper">
       <div class="container">
         <table style="width:100%">
@@ -90,7 +110,9 @@
             </th>
           </tr>
           <tr>
-            <th><p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3);">ShiroN</p></th>
+            <th>
+              <p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3);">ShiroN</p>
+            </th>
           </tr>
           <tr>
             <th>
@@ -116,50 +138,43 @@
         </table>
       </div>
     </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-
-      <!-- Brand -->
-      <div class="footer-column">
-        <h3>ShiroN</h3>
-        <p>Digital artist sharing illustrations and visual stories.</p>
-      </div>
-
-      <!-- Social Links -->
-      <div class="footer-column">
-        <h3>Other Links</h3>
-        <div class="social-icons">
-          <a href="https://www.youtube.com/playlist?list=PLV_a83IjJKiAEqJUU3SpphjhYQVsif4Ug" target="_blank"><i class="fab fa-twitter">Youtube Music List</i></a>
-          <br><a href="https://github.com/uwuShiroN" target="_blank"><i class="fab fa-github">Github</i></a>
-          <br><a href="https://sites.google.com/view/uwushiron/" target="_blank"><i class="fab fa-artstation">GoogleSites</i></a>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>ShiroN</h3>
+          <p>Digital artist sharing illustrations and visual stories.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Other Links</h3>
+          <div class="social-icons">
+            <a href="https://www.youtube.com/playlist?list=PLV_a83IjJKiAEqJUU3SpphjhYQVsif4Ug" target="_blank"><i class="fab fa-twitter">Youtube Music List</i></a>
+            <br><a href="https://github.com/uwuShiroN" target="_blank"><i class="fab fa-github">Github</i></a>
+            <br><a href="https://sites.google.com/view/uwushiron/" target="_blank"><i class="fab fa-artstation">GoogleSites</i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>My Artworks</h3>
+          <div class="art-gallery">
+            <a href="https://www.facebook.com/share/p/19VVyei7q4/"><img src="https://pbs.twimg.com/media/GsL_Q1dXIAAP-9E?format=jpg&name=large" alt="Artwork 1"></a>
+            <p> More Artworks Coming Soon...</p>
+          </div>
         </div>
       </div>
-
-      <!-- Artworks -->
-      <div class="footer-column">
-        <h3>My Artworks</h3>
-        <div class="art-gallery">
-          <a href="https://www.facebook.com/share/p/19VVyei7q4/"><img src="https://pbs.twimg.com/media/GsL_Q1dXIAAP-9E?format=jpg&name=large" alt="Artwork 1"></a>
-        <!-- 
-          <img src="https://via.placeholder.com/100" alt="Artwork 2">
-          <img src="https://via.placeholder.com/100" alt="Artwork 3">
-        -->
-          <p> More Artworks Coming Soon...</p>
-        </div>
+      <div class="footer-bottom">
+        © 2025 ShiroN. All rights reserved.
       </div>
+    </footer>
+    <div class="arrow-up" id="arrowUp">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+      </svg>
     </div>
-    <div class="footer-bottom">
-      © 2025 ShiroN. All rights reserved.
-    </div>
-  </footer>
-    <!-- Up Arrow Button -->
-<div class="arrow-up" id="arrowUp">
-  <svg viewBox="0 0 24 24" width="24" height="24">
-    <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
-  </svg>
-</div>
-  </div>
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        body { display: block !important; }
+      </style>
+      <div style="color:red;text-align:center;">This site requires JavaScript enabled.</div>
+    </noscript>
   </body>
 </html>
