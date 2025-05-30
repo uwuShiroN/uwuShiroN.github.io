@@ -187,7 +187,7 @@ footer.show {
 }
 
 .social-icons a:hover {
-  color: #1da1f2;
+  color: #75C9F5;
 }
 
 .art-gallery {
@@ -439,7 +439,7 @@ footer.show ~ .arrow-up {
   transform: rotate(180deg);
 }
 .mobile-menu-toggle.active span {
-  background: #ffb347;
+  background: #75C9F5;
 }
 
 .mobile-menu-overlay {
@@ -494,9 +494,8 @@ footer.show ~ .arrow-up {
   transition: color 0.2s;
 }
 .close-mobile-menu:hover {
-  color: #ffb347;
+  color: #75C9F5;
 }
-
 .mobile-menu-content {
   margin-top: 2.8em;
   display: flex;
@@ -508,7 +507,7 @@ footer.show ~ .arrow-up {
   font-size: 1.3em;
   color: #fff;
   text-decoration: none;
-  padding: 0.6em 0;
+  padding: 0.6em 0.6em;
   border-radius: 8px;
   transition: background 0.2s, color 0.2s;
   background: none;
@@ -517,7 +516,7 @@ footer.show ~ .arrow-up {
 }
 .mobile-menu-content a.active, .mobile-menu-content a:hover {
   background: #fff2;
-  color: #ffb347;
+  color: #75C9F5;
 }
 
 @media (max-width: 900px) {
