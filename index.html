@@ -15,15 +15,27 @@
   <nav class="navbar">
   <div class="logo">
     <div class="menu-item">
-  <img src="img.png" width="40" height="40">
-  <a href="#" class="menu-link" onclick="closeNews(); setActive(this); return false;">ShiroN's Garden</a>
-</div>
+      <img src="img.png" width="40" height="40">
+      <a href="#" class="menu-link" ...>ShiroN's Garden</a>
+    </div>
   </div>
   <div class="menu" id="navMenu">
-    <a href="#home" class="menu-link active" id="home-link" onclick="closeNews(); setActive(this);"> <i class="fas fa-house"></i> Home</a>
-    <a href="#news" class="menu-link" onclick="openNews(); setActive(this); return false;">News</a>
-    <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeNews(); setActive(this);"><i class="fas fa-user"></i> GoogleSites</a>
+    <a href="#home" class="menu-link active" id="home-link" onclick="closeNews(); setActive(this); hideFooter();"> <i class="fas fa-house"></i>Home</a>
+    <a href="#news" class="menu-link" onclick="openNews(); setActive(this); hideFooter(); return false;">News</a>
+    <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeNews(); setActive(this); hideFooter();"><i class="fas fa-user"></i> GoogleSites</a>
   </div>
+  <div class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" tabindex="0">
+  <span></span><span></span><span></span>
+</div>
+<!-- Mobile menu overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay">
+  <div class="mobile-menu-box">
+    <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Close menu">&times;</button>
+    <div class="mobile-menu-content" id="mobileMenuContent">
+      <!-- JS will clone links here -->
+    </div>
+  </div>
+</div>
 </nav>
 
   <script>
