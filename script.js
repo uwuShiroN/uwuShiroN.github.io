@@ -364,4 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.hideFooter = hideFooter;
   window.showFooter = showFooter;
   window.updateArrowPosition = updateArrowPosition;
+  
+  document.body.classList.add('footer-ready');
 });
