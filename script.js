@@ -45,6 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
   link.href = isMobile ? 'mobile.css' : 'desktop.css';
   document.head.appendChild(link);
 
+  link.onload = function() {
+    document.body.classList.remove("loading");
+    var loader = document.getElementById("loader");
+    if (loader) loader.style.display = "none";
+    var flash = document.getElementById("white-flash");
+    if (flash) {
+      flash.classList.remove("hidden");
+      setTimeout(function() {
+        flash.classList.add("hidden");
+      }, 40);
+      setTimeout(function() {
+        if (flash.parentNode) flash.parentNode.removeChild(flash);
+      }, 800);
+    }
+  };
+
   // DOM
   arrowUp = document.getElementById('arrowUp');
   const footer = document.querySelector('footer');
@@ -103,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateBackground() {
       bgCurrentX += (bgTargetX - bgCurrentX) * 0.02;
       bgCurrentY += (bgTargetY - bgCurrentY) * 0.02;
-      // 極小直接歸零
       if (Math.abs(bgCurrentX) < 0.01) bgCurrentX = 0;
       if (Math.abs(bgCurrentY) < 0.01) bgCurrentY = 0;
       bg.style.transform = `translate(${bgCurrentX}px, ${bgCurrentY}px)`;
@@ -248,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, passiveOptions);
 
-    // --- animate all ---
     function animateAll() {
       animateBackground();
       animateIcons();
@@ -259,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Responsive Mobile Menu ---
-  // (executed on both desktop and mobile)
   const toggle = document.getElementById('mobileMenuToggle');
   const overlay = document.getElementById('mobileMenuOverlay');
   const closeBtn = document.getElementById('closeMobileMenu');
@@ -327,11 +340,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(syncActiveLink, 100);
   });
 
-  // --- home active on load ---
   var homeLink = document.getElementById('home-link');
   if (homeLink) setActive(homeLink);
 
-  // --- news open/close ---
   window.setActive = setActive;
   window.openNews = openNews;
   window.closeNews = closeNews;
@@ -346,12 +357,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function closeNews() {
     document.getElementById("myNews").style.width = "0%";
-    // home active again
     var homeLink = document.getElementById('home-link');
     setActive(homeLink);
   }
 
-  // global
   window.hideFooter = hideFooter;
   window.showFooter = showFooter;
   window.updateArrowPosition = updateArrowPosition;
