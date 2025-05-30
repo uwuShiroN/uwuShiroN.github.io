@@ -20,6 +20,9 @@ html {
   line-height: 1.5;
   font-feature-settings: normal;
   tab-size: 4;
+  background: url('YOUR_STATIC_IMAGE_URL') no-repeat center center fixed;
+  background-size: cover;
+  
 }
 
 body {
@@ -27,8 +30,7 @@ body {
   flex-direction: column;
   margin: 0;
   overflow: hidden; 
-  background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center fixed;
-  background-size: cover;
+  background: transparent !important;
 }
 
 .background {
@@ -61,6 +63,7 @@ body {
   max-width: 90vw;
   white-space: nowrap;
   transform: none;
+  z-index: 100;
 }
 
 .ProfilePicture img {
@@ -128,7 +131,7 @@ footer {
   color: #eee;
   padding: 3vw 2vw;
   width: 100%;
-  z-index: 0;
+  z-index: 200;
   transition: transform 0.4s ease, opacity 0.4s ease;
   transform: translateY(100%);
   opacity: 0;
@@ -186,8 +189,10 @@ footer.show {
 
 .art-gallery img {
   width: 100%;
-  border-radius: 5px;
+  height: auto;
+  border-radius: 3px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  object-fit: contain; /* ensures the image fits without cropping */
 }
 
 .art-gallery img:hover {
@@ -202,19 +207,21 @@ footer.show {
   margin-top: 40px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+  footer {
+    padding: 2vw 1vw;
+  }
   .footer-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: 1vw;
   }
-
-  .social-icons {
-    justify-content: center;
+  .footer-column {
+    margin-bottom: 6px;
   }
-
-  .art-gallery {
-    grid-template-columns: repeat(2, 1fr);
+  .footer-bottom {
+    margin-top: 12px;
+  }
+  .art-gallery img {
+    max-height: 60px;
   }
 }
 
@@ -247,18 +254,28 @@ footer.show ~ .arrow-up {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(30, 30, 30, 0.9);
-  backdrop-filter: blur(10px);
   padding: 7.5px 1.8rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  background: rgba(30, 30, 30, 0.9);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  z-index: 1003;
+  z-index: 2003;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* add space between logo and text */
+  height: 100%;
+}
 .navbar .logo a {
   color: #FFFFFF;
   text-decoration: none;
@@ -266,6 +283,7 @@ footer.show ~ .arrow-up {
   padding: 3px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   z-index: 1003;
+  align-items: center;
 }
 
 .navbar .menu {
@@ -273,6 +291,7 @@ footer.show ~ .arrow-up {
   align-items: center;
   gap: 1.5rem;
   z-index: 1003;
+  
 }
 
 .navbar .menu a {
@@ -387,10 +406,127 @@ footer.show ~ .arrow-up {
   right: 35px;
   }
 }
-.menu-item {
+.mobile-menu-toggle {
+  z-index: 2003;
   display: flex;
-  align-items: center; /* Vertically center items */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
 }
-.menu-link {
-  margin-left: 8px;
+.mobile-menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  margin: 4px 0;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+}
+.mobile-menu-toggle.active {
+  transform: rotate(180deg);
+}
+.mobile-menu-toggle.active span {
+  background: #ffb347;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 56px; /* or your navbar height */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30,30,30,0.4);
+  z-index: 2002;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+.mobile-menu-overlay.active {
+  pointer-events: auto;
+}
+
+.mobile-menu-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px;           /* adjust as needed */
+  max-width: 90vw;
+  height: 100vh;
+  background: rgba(30,30,30,0.96);
+  box-shadow: -6px 0 20px rgba(0,0,0,0.3);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em 1.2em 1.2em 1.2em;
+  overflow-x: hidden;
+}
+
+.mobile-menu-overlay.active .mobile-menu-box {
+  transform: translateX(0%);
+}
+
+/* Close X button */
+.close-mobile-menu {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  font-size: 2.2em;
+  background: none;
+  border: none;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+  transition: color 0.2s;
+}
+.close-mobile-menu:hover {
+  color: #ffb347;
+}
+
+.mobile-menu-content {
+  margin-top: 2.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+/* Nav link styling in mobile menu */
+.mobile-menu-content a {
+  font-size: 1.3em;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.6em 0;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+  background: none;
+  text-align: left;
+  font-weight: 500;
+}
+.mobile-menu-content a.active, .mobile-menu-content a:hover {
+  background: #fff2;
+  color: #ffb347;
+}
+
+/* Only show hamburger on mobile, hide desktop */
+@media (max-width: 900px) {
+  .navbar .menu {
+    display: none !important;
+  }
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 900px) {
+  .mobile-menu-toggle, .mobile-menu-overlay {
+    display: none !important;
+  }
 }
