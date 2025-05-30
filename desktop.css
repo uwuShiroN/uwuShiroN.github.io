@@ -256,6 +256,7 @@ footer.show ~ .arrow-up {
   right: 0;
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 1003;
 }
 
 .navbar .logo a {
@@ -263,13 +264,15 @@ footer.show ~ .arrow-up {
   text-decoration: none;
   font-size: 20px;
   padding: 3px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  z-index: 1003;
 }
 
 .navbar .menu {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  z-index: 1003;
 }
 
 .navbar .menu a {
@@ -280,21 +283,25 @@ footer.show ~ .arrow-up {
   align-items: center;
   gap: 0.5rem;
   transition: color 0.3s ease;
+  z-index: 1003;
 }
 
 .navbar .menu a:hover {
   color: white;
+  z-index: 1003;
 }
 
 .navbar .menu a.active {
   text-shadow: 0 0 10px #FFFFFF;
   color: #FFFFFF;
+  z-index: 1003;
 }
 
 .toggle {
   display: none;
   flex-direction: column;
   cursor: pointer;
+  z-index: 1003;
 }
 
 .toggle span {
@@ -303,6 +310,7 @@ footer.show ~ .arrow-up {
   background: #ccc;
   margin: 4px 0;
   transition: 0.4s;
+  z-index: 1003;
 }
 
 @media (max-width: 768px) {
@@ -315,6 +323,7 @@ footer.show ~ .arrow-up {
     top: 60px;
     left: 0;
     padding: 1rem;
+    z-index: 1003;
   }
 
   .navbar .menu.open {
@@ -365,7 +374,7 @@ footer.show ~ .arrow-up {
 
 .overlay .closebtn {
   position: absolute;
-  top: 20px;
+  top: 40px;
   right: 45px;
   font-size: 60px;
 }
