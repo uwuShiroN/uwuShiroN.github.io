@@ -366,4 +366,108 @@ document.addEventListener('DOMContentLoaded', () => {
   window.updateArrowPosition = updateArrowPosition;
 
   document.body.classList.add('footer-ready');
+
+  // --- Landscape Mode Blocker for Mobile Devices ---
+  (function() {
+    function isMobile() {
+      return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function createLandscapeOverlay() {
+      const overlay = document.createElement('div');
+      overlay.id = 'landscape-blocker-overlay';
+      overlay.innerHTML = `
+        <div class="landscape-blocker-content">
+          <span class="landscape-blocker-icon">
+            <svg width="70" height="70" viewBox="0 0 64 64" fill="none">
+              <rect x="10" y="22" width="44" height="20" rx="5" fill="#fff" stroke="#222" stroke-width="3"/>
+              <rect x="16" y="28" width="32" height="8" rx="2" fill="#75C9F5"/>
+              <path d="M10 32 L54 32" stroke="#222" stroke-width="2" stroke-dasharray="4, 4"/>
+              <path d="M40 44 L44 52" stroke="#222" stroke-width="2"/>
+              <circle cx="46" cy="54" r="2" fill="#222"/>
+            </svg>
+          </span>
+          <div class="landscape-blocker-text">
+            <b>請使用直向（Portrait）模式瀏覽本網站</b><br>
+            <span style="font-size:16px;">Please rotate your device upright.<br>請將您的手機轉為直向。</span>
+          </div>
+        </div>
+      `;
+      Object.assign(overlay.style, {
+        position: 'fixed',
+        zIndex: 99999,
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        background: 'rgba(30,30,30,0.98)',
+        color: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        transition: 'opacity 0.3s',
+        opacity: '0',
+        pointerEvents: 'none'
+      });
+      const style = document.createElement('style');
+      style.textContent = `
+        #landscape-blocker-overlay .landscape-blocker-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: none;
+        }
+        #landscape-blocker-overlay .landscape-blocker-icon {
+          margin-bottom: 16px;
+          filter: drop-shadow(0 4px 14px #2228);
+        }
+        #landscape-blocker-overlay .landscape-blocker-text {
+          font-size: 1.5rem;
+          text-align: center;
+          color: #fff;
+          text-shadow: 0 2px 6px #222a;
+          line-height: 1.5;
+          font-family: 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif;
+        }
+        @media (max-width: 600px) {
+          #landscape-blocker-overlay .landscape-blocker-text {
+            font-size: 1.1rem;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+      document.body.appendChild(overlay);
+      return overlay;
+    }
+
+    function isLandscape() {
+      return window.innerWidth > window.innerHeight;
+    }
+
+    let overlay = null;
+
+    function updateOverlay() {
+      if (!isMobile()) return;
+      if (!overlay) overlay = document.getElementById('landscape-blocker-overlay') || createLandscapeOverlay();
+      if (isLandscape()) {
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+      } else {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }
+    }
+
+    window.addEventListener('resize', updateOverlay, { passive: true });
+    window.addEventListener('orientationchange', updateOverlay, { passive: true });
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateOverlay);
+    } else {
+      updateOverlay();
+    }
+  })();
+
 });
