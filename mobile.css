@@ -41,6 +41,7 @@ body {
   overflow: hidden; 
   background: transparent !important;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 50px;
 }
 
 .background {
