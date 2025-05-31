@@ -344,19 +344,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (homeLink) setActive(homeLink);
 
   window.setActive = setActive;
-  window.openNews = openNews;
-  window.closeNews = closeNews;
+  window.openAbout = openAbout;
+  window.closeAbout = closeAbout;
   function setActive(element) {
     document.querySelectorAll('.menu-link').forEach(function(link) {
       link.classList.remove('active');
     });
     element.classList.add('active');
   }
-  function openNews() {
-    document.getElementById("myNews").style.width = "100%";
+  function openAbout() {
+    document.getElementById("myAbout").style.width = "100%";
   }
-  function closeNews() {
-    document.getElementById("myNews").style.width = "0%";
+  function closeAbout() {
+    document.getElementById("myAbout").style.width = "0%";
     var homeLink = document.getElementById('home-link');
     setActive(homeLink);
   }
@@ -364,6 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
   window.hideFooter = hideFooter;
   window.showFooter = showFooter;
   window.updateArrowPosition = updateArrowPosition;
-  
+
   document.body.classList.add('footer-ready');
 });
