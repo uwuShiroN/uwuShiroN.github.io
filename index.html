@@ -46,9 +46,9 @@
         </div>
       </div>
       <div class="menu" id="navMenu">
-        <a class="menu-link active" id="home-link" onclick="closeNews(); setActive(this); hideFooter();">Home</a>
-        <a class="menu-link" onclick="openNews(); setActive(this); hideFooter(); return false;">News</a>
-        <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeNews(); setActive(this); hideFooter();">GoogleSites</a>
+        <a class="menu-link active" id="home-link" onclick="closeAbout(); setActive(this); hideFooter();">Home</a>
+        <a class="menu-link" onclick="openAbout(); setActive(this); hideFooter(); return false;">About</a>
+        <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeAbout(); setActive(this); hideFooter();">GoogleSites</a>
       </div>
       <div class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" tabindex="0">
         <span></span><span></span><span></span>
@@ -67,11 +67,11 @@
         });
         element.classList.add('active');
       }
-      function openNews() {
-        document.getElementById("myNews").style.width = "100%";
+      function openAbout() {
+        document.getElementById("myAbout").style.width = "100%";
       }
-      function closeNews() {
-        document.getElementById("myNews").style.width = "0%";
+      function closeAbout() {
+        document.getElementById("myAbout").style.width = "0%";
         var homeLink = document.getElementById('home-link');
         setActive(homeLink);
       }
@@ -80,19 +80,43 @@
         setActive(homeLink);
       });
     </script>
-        <div id="myNews" class="overlay">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNews()">&times;</a>
+        <div id="myAbout" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeAbout()">&times;</a>
       <div class="overlay-content">
-        <a href="#">WIP</a>
-        <a href="#">...</a>
-        <a href="#">...</a>
-        <a href="#">More Coming soon...</a>
+        <div class="section">
+          <img src="lilithwink.gif" alt="莉莉絲wink">
+            <div class="section-content">
+              <p>嗨！我是 <b>ShiroN</b>，一名熱愛繪圖與創作影片的內容創作者，同時也是一位學生。從很小的時候開始，我就喜歡用圖像和故事表達內心的想法，這份熱情一路延續到現在，也成為我生活中最重要的一部分。</p>
+              <p>每一支影片、每一張圖，不管花了多少時間，只要能讓觀看的人會心一笑，或感受到一點點溫暖，對我來說，就是最大的成就。</p>
+              <p>我相信，創作不一定要華麗完美，只要是真誠的，就會有人理解，有人喜歡。也許現在還只是小小的創作者，但我始終相信，只要不放棄，總有一天，會有更多人看見我所做的一切。</p>
+              <p>目前我仍持續創作中，也不斷學習，希望未來能帶給大家更多作品與歡笑。</p>
+              <p>如果你願意陪我一起走在這條路上，歡迎訂閱我的 <b>Youtube</b> 頻道以及追蹤我的臉書！</p>
+            </div>
+        </div>
+        <hr>
+        <div class="section reverse">
+          <img src="selfie.png" alt="自拍_插圖">
+          <div class="section-content">
+            <p style="color:#ffffff;font-weight:bold;">個人簡介</p>
+            <p>我來自台灣的一座小城市──新竹。<br>
+            從小我對各種事物都充滿興趣，喜歡嘗試不同的事物。<br>
+            也因為這樣，我沒有在某一個領域深耕專精，反而是在很多領域都有所接觸。<br>
+            這樣的經歷也使我能夠用培養了我用不同角度思考、學習的能力。<br>
+            我習慣從多元的觀點切入問題，也因此能更靈活地應對新的挑戰。</p>
+            <p>雖然我不敢說我專精任何技能，但我對我的一些能力還是蠻有自信的！</p>
+          </div>
+        </div>
       </div>
     </div>
     <div class="background" id="bg"></div>
     <div class="center-wrapper">
       <div class="container">
         <table style="width:100%">
+          <tr>
+            <th>
+              <p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3) ;color: rgba(255, 255, 255, 0.85);">ShiroN</p>
+            </th>
+          </tr>
           <tr>
             <th>
               <div class="ProfilePicture">
@@ -102,7 +126,9 @@
           </tr>
           <tr>
             <th>
-              <p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3);">ShiroN</p>
+              <p style="padding-bottom: 20px; font-size:20px; font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3); color: rgba(255, 255, 255, 0.8); margin: 0.5em 0 0 0;">
+                嗨！我是 ShiroN，一個愛創作的普通人 :)
+              </p>
             </th>
           </tr>
           <tr>
@@ -123,6 +149,9 @@
                 <a href="https://www.facebook.com/uwushiron">
                   <img class="icon" src="https://img.icons8.com/?size=100&id=118501&format=png&color=000000">
                 </a>
+                <a href="https://github.com/uwuShiroN">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=52539&format=png&color=000000">
+                </a>
               </div>
             </th>
           </tr>
@@ -133,18 +162,23 @@
       <div class="footer-container">
         <div class="footer-column">
           <h3>ShiroN</h3>
+          <hr>
           <p>Digital artist sharing illustrations and visual stories.</p>
         </div>
         <div class="footer-column">
           <h3>Other Links</h3>
-          <div class="social-icons">
+          <hr>
+          <div class="OtherLinks">
             <a href="https://www.youtube.com/playlist?list=PLV_a83IjJKiAEqJUU3SpphjhYQVsif4Ug" target="_blank"><i class="fab fa-twitter">Youtube Music List</i></a>
-            <br><a href="https://github.com/uwuShiroN" target="_blank"><i class="fab fa-github">Github</i></a>
-            <br><a href="https://sites.google.com/view/uwushiron/" target="_blank"><i class="fab fa-artstation">GoogleSites</i></a>
+            <!--
+            <br><a href="" target="_blank"><i class="fab fa-github"></i></a>
+            <br><a href="" target="_blank"><i class="fab fa-artstation"></i></a>
+            -->
           </div>
         </div>
         <div class="footer-column">
           <h3>My Artworks</h3>
+          <hr>
           <div class="art-gallery">
             <a href="https://www.facebook.com/share/p/19VVyei7q4/"><img src="https://pbs.twimg.com/media/GsL_Q1dXIAAP-9E?format=jpg&name=large" alt="Artwork 1"></a>
             <p> More Artworks Coming Soon...</p>
@@ -152,7 +186,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        © 2025 ShiroN. All rights reserved.
+        ShiroN's Garden / a random guy on the internet
       </div>
     </footer>
     <div class="arrow-up" id="arrowUp">
