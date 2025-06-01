@@ -2,7 +2,7 @@
 let footerShown = false;
 let arrowUp = null;
 
-// --- footer Hide/show Functions ---
+// --- footer hide/show functions ---
 function hideFooter() {
   const footer = document.querySelector('footer');
   if (footer && footer.classList.contains('show')) {
@@ -367,24 +367,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.classList.add('footer-ready');
 
-  // --- Landscape Mode Blocker for Mobile Devices ---
+  // --- landscape mode blocker ---
   (function() {
     function isMobile() {
+      // true for phones and small tablets, but not for desktop/laptops
       return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     }
-
+    function isNarrow() {
+      // show overlay if the viewport is less than or equal to 900px (adjust as needed)
+      return window.innerWidth <= 900;
+    }
     function createLandscapeOverlay() {
       const overlay = document.createElement('div');
       overlay.id = 'landscape-blocker-overlay';
       overlay.innerHTML = `
         <div class="landscape-blocker-content">
           <span class="landscape-blocker-icon">
-            <svg width="70" height="70" viewBox="0 0 64 64" fill="none">
-              <rect x="10" y="22" width="44" height="20" rx="5" fill="#fff" stroke="#222" stroke-width="3"/>
-              <rect x="16" y="28" width="32" height="8" rx="2" fill="#75C9F5"/>
-              <path d="M10 32 L54 32" stroke="#222" stroke-width="2" stroke-dasharray="4, 4"/>
-              <path d="M40 44 L44 52" stroke="#222" stroke-width="2"/>
-              <circle cx="46" cy="54" r="2" fill="#222"/>
+            <!-- Phone SVG icon -->
+            <svg width="70" height="70" viewBox="0 0 48 48" fill="none">
+              <rect x="12" y="4" width="24" height="40" rx="5" fill="#fff" stroke="#222" stroke-width="3"/>
+              <rect x="18" y="8" width="12" height="28" rx="2" fill="#75C9F5"/>
+              <circle cx="24" cy="38" r="2" fill="#222"/>
             </svg>
           </span>
           <div class="landscape-blocker-text">
@@ -449,7 +452,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let overlay = null;
 
     function updateOverlay() {
-      if (!isMobile()) return;
+      if (!isMobile() || !isNarrow()) {
+        // Hide overlay if on desktop or wide tablet
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+        }
+        return;
+      }
       if (!overlay) overlay = document.getElementById('landscape-blocker-overlay') || createLandscapeOverlay();
       if (isLandscape()) {
         overlay.style.opacity = '1';
@@ -469,5 +479,4 @@ document.addEventListener('DOMContentLoaded', () => {
       updateOverlay();
     }
   })();
-
 });
