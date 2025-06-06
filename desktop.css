@@ -30,8 +30,6 @@ html {
   line-height: 1.5;
   font-feature-settings: normal;
   tab-size: 4;
-  background: url('YOUR_STATIC_IMAGE_URL') no-repeat center center fixed;
-  background-size: cover;
 }
 
 body {
