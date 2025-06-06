@@ -97,10 +97,12 @@ td {
   border-color: white;
   height: auto;
 }
-table {
-  width: auto;
-  border-collapse: separate;
-}
+.container table {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 0 5px;
+}}
 
 .icon {
   width: 48px;
