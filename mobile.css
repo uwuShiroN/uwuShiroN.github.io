@@ -46,7 +46,7 @@ body {
   left: 0%;
   width: 100%;
   height: 100%;
-  background: url('https://images.hdqwalls.com/download/after-sunset-minimal-4k-zm-3840x2400.jpg') no-repeat center center;
+  background: content="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/background.jpg?raw=true"> no-repeat center center;
   background-size: cover;
   z-index: -1;
 }
@@ -58,7 +58,6 @@ body {
   align-items: center;
 }
 
-/* --- Updated container for mobile-friendliness and centering --- */
 .container {
   border-radius: 16px;
   background-color: rgba(255, 255, 255, 0.12);
