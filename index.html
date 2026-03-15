@@ -1,1494 +1,207 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Welcome to ShiroN's Personal Website! :D"/>
-  <meta name="author" content="ShiroN"/>
-  <meta property="og:image" content="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true"/>
-  <link rel="icon" href="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true"/>
-  <title>ShiroN's Garden</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
-  <style>
-    /* ── DARK (default) ── */
-    :root {
-      --bg:           #0e0e0e;
-      --s1:           rgba(28,22,26,0.55);
-      --s2:           rgba(36,28,33,0.60);
-      --s3:           rgba(44,34,40,0.65);
-      --pink:         #B890AA;
-      --pink-b:       rgba(184,144,170,0.22);
-      --pink-h:       rgba(184,144,170,0.35);
-      --hi:           hsl(0,10%,90%);
-      --mid:          hsl(0,5%,60%);
-      --lo:           hsl(0,4%,38%);
-      --border:       rgba(255,255,255,0.07);
-      --bh:           rgba(255,255,255,0.13);
-      --r-sm:         6px;
-      --r-md:         10px;
-      --r-lg:         14px;
-      --nav-h:        56px;
-      --sub-h:        44px;
-      --font:         'Outfit', sans-serif;
-      --mono:         'Space Mono', monospace;
-      --t:            0.2s ease;
-    }
-
-    /* ── LIGHT override — applied to <html data-theme="light"> ── */
-    html[data-theme="light"] {
-      --bg:           #f2eef4;
-      --s1:           rgba(255,252,255,0.80);
-      --s2:           rgba(243,238,248,0.85);
-      --s3:           rgba(234,228,240,0.90);
-      --hi:           #1a1018;
-      --mid:          #5a4d58;
-      --lo:           #8a7f90;
-      --border:       rgba(184,144,170,0.22);
-      --bh:           rgba(184,144,170,0.40);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      background-image:
-        radial-gradient(ellipse 60% 55% at 100% 20%, rgba(184,144,170,0.11) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 45% at 100% 75%, rgba(184,144,170,0.07) 0%, transparent 65%);
-      color: var(--hi);
-      min-height: 100vh;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    body, .card, .sec-label, .banner, .nav, .subnav, .site-footer, .art-card, .art-search-wrap, .show-more-btn { transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    button { cursor: pointer; font-family: var(--font); }
-
-    /* ══ TOP NAV ══ */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-      height: var(--nav-h);
-      background: transparent;
-      display: grid; grid-template-columns: 1fr auto 1fr;
-      align-items: center; padding: 0 28px;
-      transition: background var(--t), border-color var(--t);
-    }
-    .nav.solid {
-      background: rgba(var(--nav-solid-rgb, 14,14,14), 0.90);
-      backdrop-filter: blur(18px) saturate(140%);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav__logo { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.4px; justify-self: start; white-space: nowrap; }
-    .nav__logo em { color: var(--hi); font-style: normal; }
-    .nav__logo b  { color: var(--pink); }
-    .nav__links   { display: flex; gap: 2px; justify-content: center; }
-    .nav__link {
-      padding: 5px 13px; border-radius: var(--r-sm);
-      font-size: 0.84rem; color: var(--mid); cursor: pointer;
-      transition: color var(--t), background var(--t);
-    }
-    .nav__link:hover { color: var(--hi); background: rgba(255,255,255,0.05); }
-    .nav__link.on { color: var(--hi); border-bottom: 2px solid var(--pink); border-radius: 0; padding-bottom: 3px; }
-    .nav__right { display: flex; align-items: center; gap: 8px; justify-self: end; }
-    .nav__icon {
-      width: 30px; height: 30px; border-radius: var(--r-sm);
-      background: transparent; border: none; color: var(--mid);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.82rem; cursor: pointer; transition: color var(--t), background var(--t);
-    }
-    .nav__icon:hover { color: var(--hi); background: rgba(255,255,255,0.06); }
-
-    /* ══ HOME SUBNAV (second bar, only on home) ══ */
-    .subnav {
-      
-      
-      
-      
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center;
-      
-      
-    }
-    .subnav.hidden { display: none; }
-    .subnav__item {
-      padding: 10px 16px; font-size: 0.84rem; color: var(--mid);
-      border-bottom: 2px solid transparent; cursor: pointer;
-      transition: color var(--t), border-color var(--t);
-    }
-    .subnav__item:hover { color: var(--hi); }
-    .subnav__item.on { color: var(--hi); border-bottom-color: var(--pink); }
-
-    /* ══ PAGE OFFSET ══ */
-    /* home: offset by nav + subnav */
-    .page-home  { padding-top: 24px; }
-    /* others: offset by nav only */
-    .page-other { padding-top: 24px; }
-
-
-    /* Spacer pushes all content below the fixed nav */
-    .nav-spacer { height: var(--nav-h); flex-shrink: 0; }
-
-    .wrap { max-width: 860px; margin: 0 auto; padding-left: 16px; padding-right: 16px; padding-bottom: 72px; }
-
-    /* ══ SEC LABEL ══ */
-    .sec-label {
-      display: flex; align-items: center; gap: 9px;
-      padding: 12px 18px;
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-md); margin-bottom: 14px;
-      backdrop-filter: blur(10px);
-    }
-    .sec-label i    { font-size: 0.8rem; color: var(--mid); }
-    .sec-label span { font-size: 0.88rem; font-weight: 600; color: var(--hi); }
-
-    /* ══ BANNER ══ */
-    .banner {
-      border-radius: var(--r-lg); overflow: hidden;
-      position: relative; min-height: 200px;
-      border: 1px solid var(--border); margin-bottom: 14px;
-      background: var(--s2);
-    }
-    .banner__bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to right, rgba(14,14,14,0.80) 26%, rgba(14,14,14,0.10) 100%),
-        url('https://github.com/uwuShiroN/uwuShiroN/blob/main/GithubProfilePicture.png?raw=true') center/cover no-repeat;
-    }
-    .banner__body {
-      position: relative; z-index: 1;
-      display: flex; align-items: flex-end; gap: 18px;
-      padding: 26px; min-height: 200px;
-    }
-    .banner__avatar {
-      width: 78px; height: 78px; border-radius: var(--r-md);
-      border: 2px solid var(--pink); object-fit: cover; flex-shrink: 0;
-    }
-    .banner__name { font-size: 1.55rem; font-weight: 700; color: var(--pink); letter-spacing: -0.4px; line-height: 1.1; }
-    .banner__sub  { font-size: 0.76rem; color: var(--lo); margin-top: 3px; }
-    .banner__sub span { color: var(--mid); }
-
-    /* ══ CHIPS ══ */
-    .chips { display: flex; gap: 14px; align-items: center; padding: 0 4px; margin-bottom: 18px; font-size: 0.8rem; color: var(--mid); }
-    .chip  { display: flex; align-items: center; gap: 5px; }
-    .chip strong { color: var(--hi); font-weight: 600; }
-
-    /* ══ GLASS CARD ══ */
-    .card {
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-lg); backdrop-filter: blur(12px) saturate(130%);
-      padding: 20px 22px; margin-bottom: 14px;
-    }
-    .card__head {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 1px; color: var(--mid); margin-bottom: 16px;
-    }
-
-    /* ══ ABOUT ══ */
-    .about-grid { display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: start; }
-    .about-img  { width: 112px; height: 112px; border-radius: var(--r-md); object-fit: cover; }
-    .about-text { font-size: 0.86rem; color: var(--mid); line-height: 1.82; }
-    .about-text b { color: var(--pink); font-weight: 600; }
-
-    /* ══ LINK PILLS ══ */
-    .pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-    .pill {
-      display: inline-flex; align-items: center;
-      padding: 4px 13px; border-radius: var(--r-sm);
-      border: 1px solid var(--border); background: var(--s2);
-      font-size: 0.78rem; font-weight: 500; color: var(--mid);
-      transition: all var(--t); backdrop-filter: blur(8px);
-    }
-    .pill:hover { border-color: var(--pink-h); color: var(--hi); transform: translateY(-1px); }
-    .pill.yt:hover { color:#ff4444; border-color:rgba(255,68,68,.3); }
-    .pill.dc:hover { color:#7289da; border-color:rgba(114,137,218,.3); }
-    .pill.tw:hover { color:#1d9bf0; border-color:rgba(29,155,240,.3); }
-    .pill.ig:hover { color:#e1306c; border-color:rgba(225,48,108,.3); }
-    .pill.fb:hover { color:#1877f2; border-color:rgba(24,119,242,.3); }
-    .pill.gh:hover { color:#e8eaf2; border-color:rgba(232,234,242,.3); }
-
-    /* ══ STORY ══ */
-    .story p { font-size: 0.86rem; color: var(--mid); line-height: 1.85; }
-    .story p + p { margin-top: 13px; }
-
-    /* ══ BEATMAP-STYLE GRID PAGE (Video / Artwork) ══ */
-    .grid-search-bar {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 20px;
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-md); margin-bottom: 20px;
-      backdrop-filter: blur(10px);
-    }
-    .grid-search-bar i    { font-size: 0.85rem; color: var(--mid); }
-    .grid-search-bar span { font-size: 0.9rem; font-weight: 600; color: var(--hi); }
-
-    .item-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-
-    .item-card {
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-lg); backdrop-filter: blur(10px);
-      overflow: hidden; display: flex; flex-direction: column;
-      transition: border-color var(--t), transform var(--t);
-    }
-    .item-card:hover { border-color: var(--pink-b); transform: translateY(-2px); }
-
-    .item-thumb {
-      position: relative; aspect-ratio: 16/9;
-      background: var(--s2); overflow: hidden;
-    }
-    .item-thumb img { width:100%; height:100%; object-fit:cover; transition: transform .3s ease; }
-    .item-card:hover .item-thumb img { transform: scale(1.05); }
-    .item-overlay {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,.28); opacity: 0; transition: opacity var(--t);
-    }
-    .item-card:hover .item-overlay { opacity: 1; }
-    .item-overlay i { font-size: 1.7rem; color:#fff; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
-    .item-heart {
-      position: absolute; top: 8px; left: 8px;
-      width: 24px; height: 24px; border-radius: 50%;
-      background: rgba(14,14,14,.65);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; color: var(--pink);
-    }
-    .item-title-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 20px 12px 10px;
-      background: linear-gradient(to top, rgba(14,14,14,0.9) 0%, transparent 100%);
-    }
-    .item-title-overlay .ititle { font-size: 0.9rem; font-weight: 700; color: var(--hi); line-height: 1.2; }
-    .item-title-overlay .isub   { font-size: 0.72rem; color: var(--mid); margin-top: 2px; }
-
-    .item-info { padding: 11px 13px 6px; }
-    .item-meta { font-size: 0.72rem; color: var(--lo); margin-top: 3px; }
-
-    .item-btn {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin: 8px 13px 13px;
-      padding: 7px; border-radius: var(--r-sm);
-      border: 1px solid var(--border); background: var(--s2);
-      font-size: 0.76rem; color: var(--mid);
-      transition: all var(--t);
-    }
-    .item-btn:hover { border-color: var(--pink-b); color: var(--hi); }
-
-
-    /* ══ ARTWORK SEARCH BAR ══ */
-    .art-search-wrap {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 20px;
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-md); margin-bottom: 16px;
-      backdrop-filter: blur(10px);
-    }
-    .art-search-wrap i { font-size: 0.85rem; color: var(--mid); flex-shrink:0; }
-    .art-search-input {
-      flex: 1; background: transparent; border: none; outline: none;
-      font-family: var(--font); font-size: 0.88rem; color: var(--hi);
-    }
-    .art-search-input::placeholder { color: var(--lo); }
-
-    /* Artwork card — only show thumbnail + title overlay, no extra info below */
-    .art-card {
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-lg); backdrop-filter: blur(10px);
-      overflow: hidden; cursor: pointer;
-      transition: border-color var(--t), transform var(--t);
-    }
-    .art-card:hover { border-color: var(--pink-b); transform: translateY(-2px); }
-    .art-thumb {
-      position: relative; aspect-ratio: 1/1;
-      background: var(--s2); overflow: hidden;
-    }
-    .art-thumb img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .3s ease;
-    }
-    .art-card:hover .art-thumb img { transform: scale(1.06); }
-    .art-thumb-overlay {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,.3); opacity: 0; transition: opacity var(--t);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .art-card:hover .art-thumb-overlay { opacity: 1; }
-    .art-thumb-overlay i { font-size: 1.6rem; color:#fff; filter:drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
-    .art-title-bar {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 24px 12px 10px;
-      background: linear-gradient(to top, rgba(14,14,14,0.92) 0%, transparent 100%);
-    }
-    .art-title-bar .at-name { font-size: 0.88rem; font-weight: 700; color: var(--hi); }
-
-    /* ══ LIGHTBOX ══ */
-    .lightbox {
-      position: fixed; inset: 0; z-index: 999;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.22s ease;
-    }
-    .lightbox.open { opacity: 1; pointer-events: all; }
-
-    .lb-backdrop {
-      position: absolute; inset: 0;
-      background: rgba(10,8,9,0.75);
-      backdrop-filter: blur(18px) saturate(120%);
-    }
-
-    .lb-box {
-      position: relative; z-index: 1;
-      display: flex; gap: 0;
-      background: var(--s2);
-      border: 1px solid rgba(184,144,170,0.18);
-      border-radius: 16px;
-      overflow: hidden;
-      max-width: 88vw; max-height: 88vh;
-      width: auto;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
-      transform: scale(0.96); transition: transform 0.22s ease;
-    }
-    .lightbox.open .lb-box { transform: scale(1); }
-
-    /* Image side — flexible width */
-    .lb-img-side {
-      flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: #000; max-height: 88vh;
-      max-width: 62vw;
-    }
-    .lb-img-side img {
-      display: block;
-      max-height: 88vh; max-width: 62vw;
-      width: auto; height: auto;
-      object-fit: contain;
-    }
-
-    /* Info side */
-    .lb-info {
-      width: 300px; min-width: 240px; flex-shrink: 0;
-      padding: 28px 24px;
-      display: flex; flex-direction: column;
-      overflow-y: auto; background: var(--s2);
-      border-left: 1px solid var(--border);
-    }
-    .lb-close {
-      position: absolute; top: 14px; right: 14px;
-      width: 30px; height: 30px; border-radius: 50%;
-      background: rgba(255,255,255,0.08); border: none;
-      color: var(--mid); font-size: 0.85rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: all var(--t); z-index: 2;
-    }
-    .lb-close:hover { background: rgba(255,255,255,0.15); color: var(--hi); }
-
-    .lb-name {
-      font-size: 1.1rem; font-weight: 700; color: var(--hi);
-      line-height: 1.3; margin-bottom: 14px; padding-right: 24px;
-    }
-    .lb-info-body {
-      font-size: 0.82rem; color: var(--mid); line-height: 1.8;
-      flex: 1; white-space: pre-wrap;
-    }
-    .lb-date {
-      margin-top: 20px; padding-top: 14px;
-      border-top: 1px solid var(--border);
-      font-size: 0.76rem; color: var(--text-secondary, #7a7a7a);
-      text-align: right;
-    }
-    .lb-fb-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 12px; font-size: 0.78rem; color: var(--mid);
-      border: 1px solid var(--border); border-radius: var(--r-sm);
-      padding: 5px 12px; background: var(--s1);
-      transition: all var(--t); text-decoration: none;
-    }
-    .lb-fb-link:hover { border-color: var(--pink-b); color: var(--hi); }
-
-    @media (max-width: 700px) {
-      .lb-box { flex-direction: column; max-width: 95vw; max-height: 95vh; }
-      .lb-img-side { max-width: 95vw; max-height: 55vw; }
-      .lb-img-side img { max-width: 95vw; max-height: 55vw; }
-      .lb-info { width: 100%; border-left: none; border-top: 1px solid var(--border); max-height: 40vh; }
-    }
-
-    /* ══ PLACEHOLDER ══ */
-    .placeholder {
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-lg); backdrop-filter: blur(10px);
-      padding: 56px 22px; margin-bottom: 14px;
-      display: flex; flex-direction: column; align-items: center; gap: 9px;
-      color: var(--lo); text-align: center;
-    }
-    .placeholder i { font-size: 1.8rem; }
-    .placeholder p { font-size: 0.83rem; }
-
-    /* ══ SHOW MORE BTN ══ */
-    .grid-end-msg {
-      width: 100%; margin-top: 18px;
-      padding: 12px 20px;
-      text-align: center;
-      font-size: 0.82rem; color: var(--lo);
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-md); backdrop-filter: blur(10px);
-    }
-
-    .show-more-btn {
-      width: 100%; margin-top: 18px;
-      padding: 12px 20px;
-      background: var(--s1); border: 1px solid var(--border);
-      border-radius: var(--r-md); backdrop-filter: blur(10px);
-      color: var(--mid); font-size: 0.84rem; font-family: var(--font);
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      cursor: pointer; transition: all var(--t);
-    }
-    .show-more-btn:hover { border-color: var(--pink-b); color: var(--hi); }
-
-    /* YouTube iframe side in lightbox */
-    .lb-yt-side {
-      flex-shrink: 0;
-      display: flex; align-items: stretch;
-      background: #000;
-      max-height: 88vh; max-width: 62vw; min-width: 400px;
-    }
-    .lb-yt-side iframe {
-      width: 62vw; max-width: 700px; min-width: 400px;
-      height: 100%; min-height: 300px;
-      aspect-ratio: 16/9;
-      display: block;
-    }
-
-    /* ══ FOOTER ══ */
-    .site-footer {
-      width: 100%;
-      margin-top: 32px;
-      padding: 28px 20px 20px;
-      background: rgba(10,8,9,0.72);
-      backdrop-filter: blur(20px) saturate(120%);
-      border-top: 1px solid var(--border);
-      text-align: center;
-      display: flex; flex-direction: column; align-items: center; gap: 5px;
-    }
-
-    @media (max-width: 700px) {
-      .lb-yt-side { min-width: unset; max-width: 95vw; }
-      .lb-yt-side iframe { width: 95vw; min-width: unset; }
-    }
-
-    /* ══ OLD FOOTER (keep for reference) ══ */
-    .footer {
-      border-top: 1px solid var(--border); padding: 26px 0 14px;
-      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px;
-    }
-    .footer__gh {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.8rem; color: var(--mid); margin-bottom: 3px; transition: color var(--t);
-    }
-    .footer__gh:hover { color: var(--hi); }
-    .footer__line { font-size: 0.73rem; color: var(--lo); }
-    .footer__line .heart { color: var(--pink); }
-    .footer__line a { color: var(--pink); transition: color var(--t); }
-    .footer__line a:hover { color: var(--hi); }
-
-    /* ══ SCROLL TOP ══ */
-    .go-top {
-      position: fixed; bottom: 20px; right: 20px;
-      width: 34px; height: 34px; border-radius: var(--r-md);
-      background: var(--s2); border: 1px solid var(--border);
-      backdrop-filter: blur(8px); color: var(--mid);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; cursor: pointer; transition: all var(--t); z-index: 50;
-    }
-    .go-top:hover { color: var(--hi); border-color: var(--bh); transform: translateY(-2px); }
-
-    @media (max-width: 640px) {
-      .item-grid  { grid-template-columns: repeat(2,1fr); }
-      .about-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 400px) {
-      .item-grid { grid-template-columns: 1fr; }
-      .nav__link { padding: 5px 8px; font-size: 0.76rem; }
-    }
-
-    /* ══ STACK ══ */
-    .stack-grid { display: flex; flex-direction: column; gap: 20px; }
-    .stack-group-title { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--mid); margin-bottom: 10px; }
-    .stack-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .stack-tag {
-      padding: 5px 14px; border-radius: 99px;
-      font-size: 0.8rem; font-weight: 600;
-      border: 1px solid var(--border); background: var(--s2);
-      color: var(--hi); transition: all var(--t);
-    }
-    .stack-tag:hover { transform: translateY(-1px); }
-    .stack-tag.js   { border-color: rgba(247,223,30,0.35); color: #f7df1e; }
-    .stack-tag.html { border-color: rgba(228,77,38,0.35);  color: #e04d26; }
-    .stack-tag.css  { border-color: rgba(21,114,182,0.35); color: #1572b6; }
-    .stack-tag.java { border-color: rgba(237,117,48,0.35); color: #ed7530; }
-    .stack-tag.c    { border-color: rgba(149,149,199,0.35);color: #9595c7; }
-    .stack-tag.cpp  { border-color: rgba(0,89,156,0.35);   color: #5e9fd5; }
-
-    /* ══ LIGHT THEME overrides ══ */
-    html[data-theme="light"] body {
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse 60% 55% at 100% 20%, rgba(184,144,170,0.20) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 45% at 100% 75%, rgba(184,144,170,0.12) 0%, transparent 65%);
-      color: var(--hi);
-    }
-    html[data-theme="light"] .nav.solid {
-      background: rgba(240,236,244,0.92);
-      backdrop-filter: blur(18px) saturate(140%);
-    }
-    html[data-theme="light"] .nav__link:hover { background: rgba(0,0,0,0.05); }
-    html[data-theme="light"] .nav__icon:hover  { background: rgba(0,0,0,0.06); }
-    html[data-theme="light"] .site-footer {
-      background: rgba(230,224,236,0.88);
-    }
-    html[data-theme="light"] .card,
-    html[data-theme="light"] .sec-label,
-    html[data-theme="light"] .art-search-wrap,
-    html[data-theme="light"] .subnav,
-    html[data-theme="light"] .show-more-btn,
-    html[data-theme="light"] .grid-end-msg,
-    html[data-theme="light"] .art-card,
-    html[data-theme="light"] .banner,
-    html[data-theme="light"] .placeholder {
-      backdrop-filter: blur(8px) saturate(110%);
-    }
-    html[data-theme="light"] .lightbox .lb-box {
-      background: rgba(243,238,248,0.97);
-    }
-    html[data-theme="light"] .lb-info { background: rgba(237,230,244,0.97); }
-    html[data-theme="light"] .lb-img-side { background: #e8e0f0; }
-    html[data-theme="light"] .banner__bg {
-      background:
-        linear-gradient(to right, rgba(242,238,244,0.88) 26%, rgba(242,238,244,0.12) 100%),
-        url('https://github.com/uwuShiroN/uwuShiroN/blob/main/GithubProfilePicture.png?raw=true') center/cover no-repeat !important;
-    }
-    html[data-theme="light"] .subnav__item.on { color: var(--hi); border-bottom-color: var(--pink); }
-    html[data-theme="light"] .at-name,
-    html[data-theme="light"] .banner__name { color: var(--pink); }
-    html[data-theme="light"] .banner__sub,
-    html[data-theme="light"] .banner__sub span { color: var(--mid); }
-
-
-    /* ── LOGO ── */
-    .nav__logo { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.4px; justify-self: start; white-space: nowrap; text-decoration: none; }
-    .logo-white { color: var(--hi); }
-    .logo-pink  { color: var(--pink); }
-
-    /* ── HAMBURGER (hidden on desktop) ── */
-    .nav__hamburger { display: none; }
-
-    /* ── MOBILE MENU DRAWER ── */
-    .mobile-menu {
-      position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 250;
-      background: rgba(14,14,14,0.96);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 24px 20px;
-      display: none; flex-direction: column; gap: 4px;
-      transform: translateY(-8px);
-      opacity: 0;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    .mobile-menu.open { display: flex; opacity: 1; transform: translateY(0); }
-    html[data-theme="light"] .mobile-menu { background: rgba(240,236,244,0.97); }
-
-    .mobile-menu__links { display: flex; flex-direction: column; gap: 2px; }
-    .mobile-link {
-      padding: 10px 14px; border-radius: var(--r-sm);
-      font-size: 0.92rem; font-weight: 500; color: var(--mid);
-      cursor: pointer; transition: color var(--t), background var(--t);
-    }
-    .mobile-link:hover, .mobile-link.on { color: var(--hi); background: var(--s2); }
-    .mobile-link.on { color: var(--pink); }
-
-    .mobile-menu__actions {
-      margin-top: 12px; padding-top: 12px;
-      border-top: 1px solid var(--border);
-      display: flex; flex-direction: row; gap: 8px; flex-wrap: wrap;
-    }
-    .mobile-action-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 7px 14px; border-radius: var(--r-sm);
-      border: 1px solid var(--border); background: var(--s2);
-      font-size: 0.82rem; color: var(--mid); font-family: var(--font);
-      cursor: pointer; transition: all var(--t);
-    }
-    .mobile-action-btn:hover { border-color: var(--border-hover); color: var(--hi); }
-
-    /* ── LIGHT MODE: improved palette ── */
-    html[data-theme="light"] {
-      --bg:      #faf7fc;
-      --s1:      rgba(255,255,255,0.85);
-      --s2:      rgba(248,244,252,0.90);
-      --s3:      rgba(240,234,248,0.92);
-      --hi:      #18101a;
-      --mid:     #544058;
-      --lo:      #8e7a94;
-      --border:  rgba(150,100,140,0.18);
-      --bh:      rgba(150,100,140,0.35);
-    }
-    html[data-theme="light"] body {
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse 55% 50% at 100% 15%, rgba(184,144,170,0.22) 0%, transparent 68%),
-        radial-gradient(ellipse 40% 40% at 100% 80%, rgba(184,144,170,0.13) 0%, transparent 62%);
-      color: var(--hi);
-    }
-    html[data-theme="light"] .nav.solid  { background: rgba(250,247,252,0.94); }
-    html[data-theme="light"] .site-footer{ background: rgba(238,232,246,0.90); }
-    html[data-theme="light"] .lb-close { background: rgba(0,0,0,0.07); }
-    html[data-theme="light"] .lb-close:hover { background: rgba(0,0,0,0.14); }
-
-    /* ── RESPONSIVE BREAKPOINT ── */
-    @media (max-width: 720px) {
-      /* Hide desktop links and icon buttons except hamburger */
-      .nav__links { display: none !important; }
-      .nav__icon:not(.nav__hamburger) { display: none !important; }
-      .nav__hamburger { display: flex !important; }
-
-      /* Center logo on mobile */
-      .nav {
-        grid-template-columns: 1fr auto 1fr;
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Welcome to ShiroN's Personal Website! :D">
+    <meta name="author" content="ShiroN">
+    <meta property="og:image" content="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true">
+    <link rel="icon" href="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-RXf+QSDCUQs5WcU0tcTlt0d3Z+UxdDZkq3LO+V0+ZDbG1zD8I77dG8A+7sZDWYutk5g+tuY3+LM5fIbVbE4w1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>ShiroN's Garden</title>
+    <style>
+      #white-flash {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: linear-gradient(135deg, #111 0%, #111 100%);
+        z-index: 3000;
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 0.6s cubic-bezier(.4,0,.2,1);
       }
-      .nav__logo { justify-self: center; grid-column: 2; }
-      .nav__right { grid-column: 3; justify-self: end; }
-    }
-
-
-    /* ── LANGUAGE OPTIONS ── */
-    .lang-option {
-      display: flex; align-items: center; gap: 14px;
-      padding: 12px 16px; border-radius: var(--r-md);
-      border: 1px solid var(--border); background: var(--s2);
-      cursor: pointer; font-family: var(--font);
-      transition: all var(--t); text-align: left; width: 100%;
-    }
-    .lang-option:hover { border-color: var(--pink-b); }
-    .lang-option[data-active="true"] { border-color: var(--pink); background: var(--pink-b); }
-    .lang-opt-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--border); flex-shrink: 0; transition: background var(--t);
-    }
-    .lang-option[data-active="true"] .lang-opt-dot { background: var(--pink); }
-    .lang-opt-name { font-size: 0.88rem; font-weight: 600; color: var(--hi); }
-    .lang-opt-desc { font-size: 0.76rem; color: var(--mid); margin-top: 2px; }
-
-
-    /* ── CODED ITEMS ── */
-    .coded-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 16px; border-radius: var(--r-md);
-      border: 1px solid var(--border); background: var(--s2);
-      cursor: pointer; transition: all var(--t);
-    }
-    .coded-item:hover { border-color: var(--pink-b); transform: translateX(3px); }
-    .coded-thumb {
-      width: 44px; height: 44px; border-radius: var(--r-md);
-      background: var(--s3); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .coded-meta { flex: 1; }
-    .coded-name { font-size: 0.88rem; font-weight: 600; color: var(--hi); }
-    .coded-desc { font-size: 0.76rem; color: var(--mid); margin-top: 3px; line-height: 1.5; }
-    .coded-arrow { font-size: 0.75rem; color: var(--lo); flex-shrink: 0; }
-
-  </style>
-</head>
-<body>
-
-  <!-- ════ TOP NAV ════ -->
-  <nav class="nav" id="topnav">
-    <a href="#" class="nav__logo" onclick="navigate('home'); return false;"><span class="logo-white">ShiroN's </span><span class="logo-pink">Garden</span></a>
-    <div class="nav__links">
-      <span class="nav__link on"  onclick="navigate('home')" data-t="nav.home">Home</span>
-      <span class="nav__link"     onclick="navigate('art')" data-t="nav.art">My Artworks</span>
-      <span class="nav__link"     onclick="navigate('vid')" data-t="nav.vid">My Video</span>
-      <span class="nav__link"     onclick="navigate('study')" data-t="nav.study">Google Site</span>
-    </div>
-    <div class="nav__right">
-      <button class="nav__icon" id="lang-btn" onclick="toggleLang()" title="Language">
-        <i class="fa-solid fa-language"></i>
-      </button>
-      <button class="nav__icon" onclick="toggleTheme()" title="Toggle theme">
-        <i class="fa-solid fa-sun" id="theme-icon"></i>
-      </button>
-      <button class="nav__icon" onclick="openDisclaimer()" title="Disclaimer">
-        <i class="fa-solid fa-circle-info"></i>
-      </button>
-      <!-- Hamburger (mobile only) -->
-      <button class="nav__icon nav__hamburger" onclick="toggleMenu()" title="Menu" id="hamburger-btn">
-        <i class="fa-solid fa-bars" id="hamburger-icon"></i>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile menu drawer -->
-  <div id="mobile-menu" class="mobile-menu">
-    <div class="mobile-menu__links">
-      <span class="mobile-link on" onclick="navigate('home');closeMobileMenu()" data-t="nav.home">Home</span>
-      <span class="mobile-link" onclick="navigate('art');closeMobileMenu()" data-t="nav.art">My Artworks</span>
-      <span class="mobile-link" onclick="navigate('vid');closeMobileMenu()" data-t="nav.vid">My Video</span>
-      <span class="mobile-link" onclick="navigate('study');closeMobileMenu()" data-t="nav.study">Google Site</span>
-    </div>
-    <div class="mobile-menu__actions">
-      <button class="mobile-action-btn" onclick="openLangModal();closeMobileMenu()"><i class="fa-solid fa-language"></i> Language</button>
-      <button class="mobile-action-btn" onclick="toggleTheme()"><i class="fa-solid fa-sun" id="mobile-theme-icon"></i> Theme</button>
-      <button class="mobile-action-btn" onclick="openDisclaimer();closeMobileMenu()"><i class="fa-solid fa-circle-info"></i> Disclaimer</button>
-    </div>
-  </div>
-  <div class="nav-spacer"></div>
-
-  <!-- ════ PAGES ════ -->
-
-  <!-- ── HOME PAGE ── -->
-  <div id="pg-home" class="wrap page-home">
-
-    <div class="sec-label">
-      <i class="fa-regular fa-user"></i>
-      <span data-t="label.myinfo">My Info</span>
-    </div>
-
-    <div class="banner">
-      <div class="banner__bg"></div>
-      <div class="banner__body">
-        <img class="banner__avatar"
-          src="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true"
-          alt="ShiroN"/>
-        <div>
-          <div class="banner__name" data-t="banner.name">ShiroN</div>
-          <div class="banner__sub"><span data-t="banner.sub">白貓 · Hsinchu, Taiwan 🇹🇼</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="chips">
-      <div class="chip"><i class="fa-solid fa-palette"></i>&nbsp;<strong>Creator</strong></div>
-      <div class="chip"><i class="fa-solid fa-film"></i>&nbsp;<strong>Video Editor</strong></div>
-      <div class="chip"><i class="fa-solid fa-location-dot"></i>&nbsp;<strong>新竹市</strong></div>
-    </div>
-
-    <!-- ── SUBNAV: inline, sits right under chips ── -->
-    <div class="subnav" id="subnav">
-      <div class="subnav__item on"  onclick="showSection('about', this)" data-t="nav.about">About Me</div>
-      <div class="subnav__item"     onclick="showSection('story', this)" data-t="nav.story">My Story</div>
-      <div class="subnav__item"     onclick="showSection('stack', this)" data-t="nav.stk">My Stack</div>
-      <div class="subnav__item"     onclick="showSection('coded', this)" data-t="nav.coded">Coded</div>
-    </div>
-
-    <!-- About Me section -->
-    <div id="sec-about">
-      <div class="sec-label">
-        <i class="fa-regular fa-address-card"></i>
-        <span data-t="label.about">About Me</span>
-      </div>
-      <div class="card">
-        <div class="card__head"><i class="fa-solid fa-user"></i> <span data-t="card.profile">Profile</span></div>
-        <div class="about-grid">
-          <div>
-            <img class="about-img" src="https://uwushiron.github.io/lilithwink.gif" alt="ShiroN"/>
-          </div>
-          <div>
-            <div class="about-text">
-              海泥豪！我是 <b>ShiroN</b>，也可以叫我白貓 :><br>
-              我有很多興趣，例如畫畫、剪影片，以及很多很多。<br>
-              每張圖、每支影片，無論過程花了多久時間，只要能讓某個看到的人揚起嘴角，對我來說，那便足夠了。
-            </div>
-            <div class="about-text" style="margin-top:11px;">
-              我相信，創作不用完美，只要付諸真心，總有一天，會有人理解、有人喜歡，<br>
-              只要我不放棄，總有一天，我會讓更多人看見我。<br>
-              希望在未來的創作不單是展現自己，更能為別人帶來改變，在那些人的心中留下我的名字。
-            </div>
-            <div class="about-text" style="margin-top:12px; color:var(--hi);">
-              這份信念是現在的我創作的動力。<br>
-              如果你願意支持我的話，歡迎追蹤我！(。 '▽'。)♡
-            </div>
-            <div class="pills">
-              <a href="https://www.youtube.com/@uwuShiroN"   target="_blank" class="pill yt">YouTube</a>
-              <a href="https://discord.gg/FBPGSRhFbV"        target="_blank" class="pill dc">Discord</a>
-              <a href="https://x.com/uwuShiroN"              target="_blank" class="pill tw">Twitter / X</a>
-              <a href="https://www.instagram.com/uwushiron/" target="_blank" class="pill ig">Instagram</a>
-              <a href="https://www.facebook.com/uwushiron"   target="_blank" class="pill fb">Facebook</a>
-              <a href="https://github.com/uwuShiroN"         target="_blank" class="pill gh">GitHub</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- My Story section -->
-    <div id="sec-story" style="display:none;">
-      <div class="sec-label">
-        <i class="fa-solid fa-seedling"></i>
-        <span data-t="label.story">My Story</span>
-      </div>
-      <div class="card">
-        <div class="card__head"><i class="fa-solid fa-book-open"></i> Background</div>
-        <div class="story">
-          <p>
-            我生在台灣的一個城市──新竹。從小，我就對各種事情感興趣，<br>
-            由於感興趣的事情很多，所以我自己也努力研究過很多不同的事物，接觸過很多不同的領域。<br>
-            這些經驗讓我能用不同的角度思考，且能夠用領域間相似的概念去學習。
-          </p>
-          <p>
-            我一開始並不喜歡自己，在成長過程中，有許多人對我有著深刻的影響。<br>
-            正是因為他們，才能有現在這個「我喜歡的我」。<br>
-            也因此，我非常尊敬每一個為我帶來影響的人，也希望有一天，我也能像他們一樣，為他人帶去改變。
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- My Stack section (hidden by default) -->
-    <div id="sec-stack" style="display:none;">
-      <div class="sec-label">
-        <i class="fa-solid fa-layer-group"></i>
-        <span data-t="label.stack">My Stack</span>
-      </div>
-      <div class="card">
-        <div class="card__head"><i class="fa-solid fa-code"></i> Technologies</div>
-        <div class="stack-grid">
-          <div class="stack-group">
-            <div class="stack-group-title" data-t="stack.frontend">Frontend</div>
-            <div class="stack-tags">
-              <span class="stack-tag js">JavaScript</span>
-              <span class="stack-tag html">HTML</span>
-              <span class="stack-tag css">CSS</span>
-            </div>
-          </div>
-          <div class="stack-group">
-            <div class="stack-group-title" data-t="stack.backend">Backend</div>
-            <div class="stack-tags">
-              <span class="stack-tag java">Java</span>
-              <span class="stack-tag c">C</span>
-              <span class="stack-tag cpp">C++</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Coded section -->
-    <div id="sec-coded" style="display:none;">
-      <div class="sec-label">
-        <i class="fa-solid fa-code"></i>
-        <span data-t="label.coded">Coded</span>
-      </div>
-      <div class="card">
-        <div class="card__head"><i class="fa-solid fa-globe"></i> <span data-t="card.coded">Projects I coded from scratch</span></div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-
-          <div class="coded-item" onclick="openMyWeb()">
-            <div class="coded-thumb">
-              <i class="fa-solid fa-seedling" style="font-size:1.4rem;color:var(--pink);"></i>
-            </div>
-            <div class="coded-meta">
-              <div class="coded-name">ShiroN's Garden</div>
-              <div class="coded-desc">This website — a personal portfolio built from scratch using pure HTML, CSS &amp; JS. No frameworks, no libraries, just code.</div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square coded-arrow"></i>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /pg-home -->
-
-  <!-- ── ARTWORKS PAGE ── -->
-  <div id="pg-art" class="wrap page-other" style="display:none;">
-    <div class="art-search-wrap">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input class="art-search-input" id="art-search" type="text" placeholder="Search artworks..." data-tp="search.art" oninput="filterArt(this.value)"/>
-    </div>
-    <!-- JS renders cards here -->
-    <div class="item-grid" id="art-grid"></div>
-    <button class="show-more-btn" id="art-show-more" onclick="gridShowMore('art')">
-      <i class="fa-solid fa-chevron-down"></i> Show more
-    </button>
-    <div class="grid-end-msg" id="art-end" style="display:none;" data-t="grid.end">That's everything! >A<</div>
-  </div>
-
-  <!-- ── LIGHTBOX MODAL ── -->
-  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
-    <div class="lb-backdrop"></div>
-    <div class="lb-box" id="lb-box">
-      <button class="lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="lb-img-side" id="lb-img-side">
-        <img id="lb-img" src="" alt="artwork"/>
-      </div>
-      <div class="lb-yt-side" id="lb-yt-side" style="display:none;">
-        <iframe id="lb-yt-iframe" src="" frameborder="0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen></iframe>
-      </div>
-      <div class="lb-info">
-        <div class="lb-name" id="lb-name"></div>
-        <div class="lb-info-body" id="lb-body"></div>
-        <a id="lb-link" href="#" target="_blank" class="lb-fb-link" style="display:none;">
-          <i class="fa-brands fa-facebook"></i> View on Facebook
-        </a>
-        <div class="lb-date" id="lb-date"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── VIDEO PAGE ── -->
-  <div id="pg-vid" class="wrap page-other" style="display:none;">
-    <div class="art-search-wrap">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input class="art-search-input" id="vid-search" type="text" placeholder="Search videos..." data-tp="search.vid" oninput="filterVid(this.value)"/>
-    </div>
-    <!-- JS renders cards here -->
-    <div class="item-grid" id="vid-grid"></div>
-    <button class="show-more-btn" id="vid-show-more" onclick="gridShowMore('vid')">
-      <i class="fa-solid fa-chevron-down"></i> Show more
-    </button>
-    <div class="grid-end-msg" id="vid-end" style="display:none;" data-t="grid.end">That's everything! >A<</div>
-  </div>
-
-  <!-- ── Google Sites PAGE ── -->
-  <div id="pg-study" class="wrap page-other" style="display:none;">
-    <div class="placeholder">
-      <i class="fa-solid fa-earth-asia"></i>
-      <p>Redirecting to Google Sites...</p>
-    </div>
-  </div>
-
-  <!-- ════ FOOTER ════ -->
-  <footer class="site-footer">
-    <a href="https://github.com/uwuShiroN/uwuShiroN.github.io" target="_blank" class="footer__gh">
-      <i class="fa-brands fa-github"></i> Github
-    </a>
-    <div class="footer__line" data-t="footer.by">Maintained with <span class="heart">♥</span> by <a href="https://github.com/uwuShiroN" target="_blank">ShiroN</a></div>
-    <div class="footer__line">© ShiroN's Garden 2026</div>
-  </footer>
-
-  <button class="go-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <i class="fa-solid fa-arrow-up"></i>
-  </button>
-
-  <script>
-    // ── DATA FIRST (must be before any function calls) ──
-
-    // Rewrite GitHub raw URLs to use smaller CDN-served images for thumbnails
-    function thumbUrl(url) {
-      if (!url) return '';
-      // Convert github blob URL to raw.githubusercontent for CDN resize
-      if (url.includes('github.com') && url.includes('?raw=true')) {
-        return url.replace('github.com', 'raw.githubusercontent.com')
-                  .replace('/blob/', '/')
-                  .replace('?raw=true', '') + '?w=480&auto=webp';
+      #white-flash.hidden {
+        opacity: 0;
+        pointer-events: none;
       }
-      return url;
-    }
-
-    const ARTWORKS = [
-      {
-        name: '🎾',
-        imgSrc: 'https://github.com/uwuShiroN/ShiroNuwu.github.io/blob/main/konatatennis.jpg?raw=true',
-        previewColor: 'linear-gradient(135deg, #2a1f2e 0%, #B890AA 100%)',
-        info: `drew for fun
-
-🤖 background was AI generated — im not that good`,
-        date: '26/2/9',
-        link: 'https://www.facebook.com/photo/?fbid=26375168528741725&set=a.5179938272024725'
-      },
-      {
-        name: '📓 成德校定必修「思辨力」課程 — 筆記本設計',
-        imgSrc: 'https://github.com/uwuShiroN/ShiroNuwu.github.io/blob/main/cdjh.jpg?raw=true',
-        previewColor: 'linear-gradient(135deg, #0d1f1a 0%, #1a3a2a 50%, #0f2818 100%)',
-        info: `// 設計理念
-本作品以「思辨力」課程為主軸，結合成德高中的形象與價值觀，設計出一款兼具識別性與教育意涵的筆記本封面。
-
-「思辨力」為成德高中開設的校定必修課程，旨在彰顯學校的辦學理念與教育特色。課程核心在於培養學生具備理性思考、判斷資訊、提出觀點與解決問題的能力。
-
-設計中融入了 ORID 討論架構、反詐騙與假新聞的辨識、SDGs 永續發展目標，以及 OREO 式論述技巧等學習主題。
-
-視覺風格融合了成德高中的代表色與校服元素，整體設計以親切熟悉的學生形象，象徵「思辨力」不僅是一門課程，更是一種思考態度與關鍵能力的培養。`,
-        date: '於 25/5/3 完稿',
-        link: 'https://www.facebook.com/photo/?fbid=24117034654555135&set=a.5179938272024725'
-      },
-      {
-        name: '🌙',
-        imgSrc: 'https://github.com/uwuShiroN/ShiroNuwu.github.io/blob/main/moon.jpg?raw=true',
-        previewColor: 'linear-gradient(135deg, #0a0a1a 0%, #1a1040 40%, #2a1828 100%)',
-        info: `某些人
-或許是一縷微光，橫穿暗夜，將視界燃成燦爛星河。
-或許是一句短語，輕若呢喃，卻撫平了生命中破碎的信仰。
-或許是途經的影子，匆匆掠過，卻在心湖投下一道漣漪。
-或許是眼底的風沙，無痕散落，卻刻下一段無法抹去的記憶。
-
-世人如潮，有人攜風而來，有人隨浪而去。
-而我，終究無法否認，若非這些交織的瞬息，便不再有如今的自己。
-
-人生過客
-有些名字，早已淹沒於時間的塵埃，在記憶的深處，化為無形的殘響。
-有些面容，早已消散在風的彼端，隨歲月飄散，化作虛無的雲煙。
-
-這張圖，或許是我與過往的訣別，又或許，是等待一場未至的呼喚。
-但願筆落之時，心中的波瀾已然平靜。
-
-願今日如初陽映照晨露，溫暖而純淨；
-如星河橫亙長夜，遼遠而深邃；
-如你所願的一切美好，悄然在時間深處發芽。
-
-作為繪師，我只能畫下那些在心中縈繞的幻影，
-將腦海深處的畫面，化作無聲的印記。
-將時間定格於最美的一瞬，讓事物停留在無暇的邊緣。
-
-「我無法預知這一天對你而言會是怎樣的模樣，
- 但我由衷祈願，它會是一段美好的時光。」`,
-        date: '25/12/11',
-        link: null
-      },
-      { comingSoon: true, imgSrc: '', name: '' },
-      { comingSoon: true, imgSrc: '', name: '' },
-      { comingSoon: true, imgSrc: '', name: '' }
-    ];
-
-    const VIDEOS = [
-      {
-        ytId: 'Z1gqS-Aqll0',
-        name: '老 人 與 判 官',
-        info: `判官英豪真好玩💀一天不玩難受 輸了難受一天 第一部中文特戰影片?
-
-我做影片的目標是讓觀眾「開心的笑出來」
-
-如果過程中你有真心的笑過，不妨點個喜歡、按個訂閱，我會很感謝你們的🙏 :D`,
-        date: ''
-      },
-      {
-        ytId: '9Ccru-zLvT4',
-        name: '506 第九組《別再上當！安全要靠自己守護》',
-        info: `此影片為成德高中思辨力課程所要求之作業，內容為第九組所錄製和剪輯的短片。
-
-詐騙手法解析
-• 假冒專業身份 — 自稱投資專家、經理、開戶專員等
-• 誇大獲利保證 — 「保證穩賺不賠」「短期翻倍」
-• 低投入高回報 — 降低戒心，使其容易上鉤
-• 煽動情緒，製造緊迫感 — FOMO心理操控
-
-防範策略
-• 不輕信高回報承諾
-• 查證對方身份是否合法，可撥打165查證
-• 保持冷靜，不急著決定
-• 不透露個人資訊或匯款
-• 選擇正規金融機構`,
-        date: ''
-      },
-      {
-        ytId: 'v4p-ANBO0Fw',
-        name: 'Saba BGM recorder cover',
-        info: `worse than i thought 😅
-
-saba channel @SamekoSaba`,
-        date: ''
-      },
-      { comingSoon: true },
-      { comingSoon: true },
-      { comingSoon: true }
-    ];
-
-    // ── GRID RENDERER ──
-    const gridState = { art: { visible: 6 }, vid: { visible: 6 } };
-
-    function renderGrid(type) {
-      const data  = type === 'art' ? ARTWORKS : VIDEOS;
-      const grid  = document.getElementById(type + '-grid');
-      const btn   = document.getElementById(type + '-show-more');
-      const endEl = document.getElementById(type + '-end');
-      if (!grid) return;
-      const shown = gridState[type].visible;
-
-      grid.innerHTML = '';
-      data.forEach((item, i) => {
-        const cs = !!item.comingSoon;
-        const card = document.createElement('div');
-        card.className = 'art-card';
-        if (i >= shown) card.style.display = 'none';
-        if (!cs) card.onclick = () => openLightbox(i, type);
-
-        if (type === 'art') {
-          if (cs) {
-            card.innerHTML = `<div class="art-thumb" style="aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:var(--s2);"><span style="font-size:0.82rem;color:var(--lo)">coming soon...</span></div>`;
-          } else if (item.imgSrc) {
-            // Use a smaller version by capping display width and deferring load
-            // Real image → fill the card, name shown only in title bar at bottom
-            card.innerHTML = `<div class="art-thumb" style="aspect-ratio:1/1;position:relative;background:var(--s2);">
-                <img src="${thumbUrl(item.imgSrc)}" alt="${item.name}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" onerror="this.src='';this.closest('.art-thumb').style.background='${item.previewColor||'var(--s2)'}';"/>
-                <div class="art-thumb-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
-                <div class="art-title-bar"><div class="at-name">${item.name}</div></div>
-               </div>`;
-          } else {
-            // No image yet → gradient bg + big centred emoji as placeholder
-            const bgStyle = item.previewColor ? item.previewColor : 'var(--s2)';
-            card.innerHTML = `<div class="art-thumb" style="aspect-ratio:1/1;position:relative;background:${bgStyle};">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
-                  <span style="font-size:3.5rem;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.6));">${item.name}</span>
-                </div>
-                <div class="art-thumb-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
-                <div class="art-title-bar"><div class="at-name">${item.name}</div></div>
-               </div>`;
-          }
-        } else {
-          card.innerHTML = cs
-            ? `<div class="art-thumb" style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:var(--s2);"><span style="font-size:0.82rem;color:var(--lo)">coming soon...</span></div>`
-            : `<div class="art-thumb" style="aspect-ratio:16/9;">
-                <img src="https://img.youtube.com/vi/${item.ytId}/mqdefault.jpg" alt="${item.name}"/>
-                <div class="art-thumb-overlay"><i class="fa-brands fa-youtube" style="font-size:2rem;color:#ff4444;"></i></div>
-                <div class="art-title-bar"><div class="at-name">${item.name}</div></div>
-               </div>`;
-        }
-        grid.appendChild(card);
-      });
-
-      const allDone = shown >= data.length;
-      if (btn)   btn.style.display   = allDone ? 'none' : '';
-      if (endEl) endEl.style.display = allDone ? ''     : 'none';
-    }
-
-    function gridShowMore(type) {
-      const data = type === 'art' ? ARTWORKS : VIDEOS;
-      gridState[type].visible = Math.min(gridState[type].visible + 3, data.length);
-      renderGrid(type);
-    }
-
-    function filterArt(q) {
-      q = q.toLowerCase();
-      document.querySelectorAll('#art-grid .art-card').forEach(c => {
-        const n = c.querySelector('.at-name');
-        c.style.display = (!n || n.textContent.toLowerCase().includes(q)) ? '' : 'none';
-      });
-    }
-
-    function filterVid(q) {
-      q = q.toLowerCase();
-      document.querySelectorAll('#vid-grid .art-card').forEach(c => {
-        const n = c.querySelector('.at-name');
-        c.style.display = (!n || n.textContent.toLowerCase().includes(q)) ? '' : 'none';
-      });
-    }
-
-    // ── LIGHTBOX ──
-    function openLightbox(idx, type) {
-      type = type || 'art';
-      if (type === 'art') {
-        const a = ARTWORKS[idx];
-        document.getElementById('lb-img-side').style.display = '';
-        document.getElementById('lb-yt-side').style.display  = 'none';
-        document.getElementById('lb-img').src = a.imgSrc;
-        document.getElementById('lb-name').textContent = a.name;
-        document.getElementById('lb-body').textContent = a.info + '\n\n\u00a9 Reproduction permitted with attribution to ShiroN';
-        document.getElementById('lb-date').textContent = a.date;
-        const lnk = document.getElementById('lb-link');
-        if (a.link) { lnk.href = a.link; lnk.style.display = 'inline-flex'; lnk.innerHTML = '<i class="fa-brands fa-facebook"></i> View on Facebook'; }
-        else { lnk.style.display = 'none'; }
-      } else {
-        const v = VIDEOS[idx];
-        document.getElementById('lb-img-side').style.display = 'none';
-        document.getElementById('lb-yt-side').style.display  = '';
-        document.getElementById('lb-yt-iframe').src = 'https://www.youtube.com/embed/' + v.ytId + '?autoplay=1';
-        document.getElementById('lb-name').textContent = v.name;
-        document.getElementById('lb-body').textContent = v.info;
-        document.getElementById('lb-date').textContent = v.date || '';
-        const lnk = document.getElementById('lb-link');
-        lnk.href = 'https://www.youtube.com/watch?v=' + v.ytId;
-        lnk.style.display = 'inline-flex';
-        lnk.innerHTML = '<i class="fa-brands fa-youtube"></i> Watch on YouTube';
+      body.loading > *:not(#white-flash):not(noscript) {
+        display: none !important;
       }
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
-      const f = document.getElementById('lb-yt-iframe');
-      if (f) f.src = '';
-    }
-
-    function closeLightboxOnBg(e) {
-      if (e.target.classList.contains('lightbox') || e.target.classList.contains('lb-backdrop')) closeLightbox();
-    }
-
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-    // ── THEME TOGGLE ──
-    (function() {
-      const saved = localStorage.getItem('theme') || 'dark';
-      if (saved === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        document.addEventListener('DOMContentLoaded', () => {
-          const ic = document.getElementById('theme-icon');
-          if (ic) ic.className = 'fa-solid fa-moon';
+      footer {
+        display: none;
+      }
+      body.footer-ready footer {
+        display: block;
+      }
+    </style>
+  </head>
+  <script src="script.js"></script>
+    <div id="white-flash"></div>
+    <nav class="navbar">
+      <div class="logo">
+        <div class="menu-item">
+          <img src="https://github.com/uwuShiroN/uwuShiroN.github.io/blob/main/icon.jpg?raw=true" width="40" height="40">
+          <a  class="menu-link">ShiroN's Garden</a>
+        </div>
+      </div>
+      <div class="menu" id="navMenu">
+        <a class="menu-link active" id="home-link" onclick="closeAbout(); setActive(this); hideFooter();">Home</a>
+        <a class="menu-link" onclick="openAbout(); setActive(this); hideFooter(); return false;">About</a>
+        <a href="https://sites.google.com/view/uwushiron/" class="menu-link" onclick="closeAbout(); setActive(this); hideFooter();">GoogleSites</a>
+      </div>
+      <div class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-box">
+          <button class="close-mobile-menu" id="closeMobileMenu" aria-label="Close menu">&times;</button>
+          <div class="mobile-menu-content" id="mobileMenuContent"></div>
+        </div>
+      </div>
+    </nav>
+    <script>
+      function setActive(element) {
+        document.querySelectorAll('.menu-link').forEach(function(link) {
+          link.classList.remove('active');
         });
+        element.classList.add('active');
       }
-    })();
-
-    function toggleTheme() {
-      const root = document.documentElement;
-      const isLight = root.getAttribute('data-theme') === 'light';
-      const next = isLight ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      const iconClass = next === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-      const ic = document.getElementById('theme-icon');
-      const mic = document.getElementById('mobile-theme-icon');
-      if (ic)  ic.className  = iconClass;
-      if (mic) mic.className = iconClass;
-    }
-
-    // ── DISCLAIMER MODAL ──
-    function openDisclaimer() {
-      document.getElementById('disclaimer-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDisclaimer() {
-      document.getElementById('disclaimer-modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    // ── NAV ──
-    let currentPage = 'home';
-    const topnav = document.getElementById('topnav');
-    window.addEventListener('scroll', () => topnav.classList.toggle('solid', scrollY > 8));
-
-    function navigate(id) {
-      document.querySelectorAll('[id^="pg-"]').forEach(p => p.style.display = 'none');
-      document.getElementById('pg-' + id).style.display = '';
-      const subnav = document.getElementById('subnav');
-      subnav.classList.toggle('hidden', id !== 'home');
-      document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('on'));
-      document.querySelectorAll('.nav__link').forEach(l => {
-        if (l.textContent.trim() === {home:'Home',art:'My Artworks',vid:'My Video',study:'Google Sites'}[id])
-          l.classList.add('on');
-      });
-      currentPage = id;
-      window.scrollTo({top:0, behavior:'smooth'});
-      if (id === 'study') window.open('https://sites.google.com/view/uwushiron/%E9%A6%96%E9%A0%81', '_blank');
-    }
-
-    function showSection(id, el) {
-      ['about','story','stack','coded'].forEach(s => {
-        const el2 = document.getElementById('sec-' + s);
-        if (el2) el2.style.display = s === id ? '' : 'none';
-      });
-      document.querySelectorAll('.subnav__item').forEach(s => s.classList.remove('on'));
-      el.classList.add('on');
-    }
-
-    // ── HAMBURGER MENU ──
-    let menuOpen = false;
-    function toggleMenu() {
-      menuOpen = !menuOpen;
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('open', menuOpen);
-      document.getElementById('hamburger-icon').className = menuOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-    }
-    function closeMobileMenu() {
-      menuOpen = false;
-      document.getElementById('mobile-menu').classList.remove('open');
-      document.getElementById('hamburger-icon').className = 'fa-solid fa-bars';
-    }
-
-    // ── MY WEB MODAL ──
-    function openMyWeb() {
-      document.getElementById('myweb-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeMyWeb() {
-      document.getElementById('myweb-modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function confirmMyWeb() {
-      closeMyWeb();
-      window.open('https://uwushiron.github.io', '_blank');
-    }
-
-    // ── LANGUAGE SYSTEM ──
-    const TRANSLATIONS = {
-      mix: {
-        'nav.home':'Home','nav.art':'My Artworks','nav.vid':'My Video','nav.study':'Google Site',
-        'nav.about':'About Me','nav.story':'My Story','nav.stk':'My Stack',
-        'nav.coded':'Coded',
-        'nav.coded':'Coded',
-        'label.myinfo':'My Info','label.about':'About Me','label.story':'My Story','label.stack':'My Stack',
-        'label.coded':'Coded','card.coded':'Projects I coded from scratch',
-        'label.coded':'Coded','card.coded':'Projects I coded from scratch',
-        'card.profile':'Profile',
-        'banner.name':'ShiroN','banner.sub':'白貓 · Hsinchu, Taiwan 🇹🇼',
-        'chip.creator':'Creator','chip.editor':'Video Editor',
-        'stack.frontend':'Frontend','stack.backend':'Backend','stack.web':'My Web Projects',
-        'search.art':'Search artworks...','search.vid':'Search videos...',
-        'footer.by':'Maintained with ♥ by ShiroN',
-        'grid.end':"That's everything! >A<"
-      },
-      en: {
-        'nav.home':'Home','nav.art':'My Artworks','nav.vid':'My Video','nav.study':'Google Site',
-        'nav.about':'About Me','nav.story':'My Story','nav.stk':'My Stack',
-        'label.myinfo':'My Info','label.about':'About Me','label.story':'My Story','label.stack':'My Stack',
-        'card.profile':'Profile',
-        'banner.name':'ShiroN','banner.sub':'White Cat · Hsinchu, Taiwan 🇹🇼',
-        'chip.creator':'Creator','chip.editor':'Video Editor',
-        'stack.frontend':'Frontend','stack.backend':'Backend','stack.web':'My Web Projects',
-        'search.art':'Search artworks...','search.vid':'Search videos...',
-        'footer.by':'Maintained with ♥ by ShiroN',
-        'grid.end':"That's everything! >A<"
-      },
-      zh: {
-        'nav.home':'首頁','nav.art':'我的畫作','nav.vid':'我的影片','nav.study':'Google 網站',
-        'nav.about':'關於我','nav.story':'我的故事','nav.stk':'我的技術',
-        'nav.coded':'我的程式作品',
-        'label.myinfo':'個人資訊','label.about':'關於我','label.story':'我的故事','label.stack':'我的技術',
-        'label.coded':'程式作品','card.coded':'我從零開始寫的網站',
-        'card.profile':'個人簡介',
-        'banner.name':'ShiroN','banner.sub':'白貓 · 台灣 新竹 🇹🇼',
-        'chip.creator':'創作者','chip.editor':'影片剪輯',
-        'stack.frontend':'前端','stack.backend':'後端','stack.web':'我的網站作品',
-        'search.art':'搜尋畫作...','search.vid':'搜尋影片...',
-        'footer.by':'由 ShiroN 用 ♥ 維護',
-        'grid.end':'已經到底啦～ >A<'
+      function openAbout() {
+        document.getElementById("myAbout").style.width = "100%";
       }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'mix';
-
-    function applyLang(lang) {
-      const t = TRANSLATIONS[lang] || TRANSLATIONS.mix;
-      // Translate text nodes
-      document.querySelectorAll('[data-t]').forEach(el => {
-        const key = el.getAttribute('data-t');
-        if (t[key]) {
-          // For footer.by keep the heart span intact
-          if (key === 'footer.by') {
-            el.innerHTML = t[key].replace('♥', '<span class="heart">♥</span>')
-              .replace('ShiroN', '<a href="https://github.com/uwuShiroN" target="_blank">ShiroN</a>');
-          } else {
-            el.textContent = t[key];
-          }
-        }
+      function closeAbout() {
+        document.getElementById("myAbout").style.width = "0%";
+        var homeLink = document.getElementById('home-link');
+        setActive(homeLink);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        var homeLink = document.getElementById('home-link');
+        setActive(homeLink);
       });
-      // Translate placeholders
-      document.querySelectorAll('[data-tp]').forEach(el => {
-        const key = el.getAttribute('data-tp');
-        if (t[key]) el.placeholder = t[key];
-      });
-      // Update navigate label map used in active state sync
-      window._navLabels = {
-        home: t['nav.home'], art: t['nav.art'], vid: t['nav.vid'], study: t['nav.study']
-      };
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-    }
-
-    function openLangModal() {
-      // Mark active option
-      ['mix','en','zh'].forEach(l => {
-        const opt = document.getElementById('lang-opt-' + l);
-        if (opt) opt.setAttribute('data-active', l === currentLang ? 'true' : 'false');
-      });
-      document.getElementById('lang-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLang() {
-      document.getElementById('lang-modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function setLang(lang) {
-      applyLang(lang);
-      ['mix','en','zh'].forEach(l => {
-        const opt = document.getElementById('lang-opt-' + l);
-        if (opt) opt.setAttribute('data-active', l === lang ? 'true' : 'false');
-      });
-      closeLang();
-    }
-    function toggleLang() { openLangModal(); }
-
-
-
-    // ── INIT ──
-    renderGrid('art');
-    renderGrid('vid');
-    navigate('home');
-    applyLang(currentLang);
-  </script>
-  <!-- ── DISCLAIMER MODAL ── -->
-  <div class="lightbox" id="disclaimer-modal" onclick="if(event.target===this||event.target.classList.contains('lb-backdrop'))closeDisclaimer()">
-    <div class="lb-backdrop"></div>
-    <div class="lb-box" style="max-width:520px;width:90vw;flex-direction:column;">
-      <button class="lb-close" onclick="closeDisclaimer()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="lb-info" style="width:100%;border-left:none;padding:32px 28px;">
-        <div class="lb-name" style="margin-bottom:16px;">📄 Disclaimer</div>
-        <div class="lb-info-body" style="font-size:0.84rem;line-height:1.85;">This website is inspired by <a href="https://himejoshi.moe" target="_blank" style="color:var(--pink);">Himejoshi</a>, an osu! statistics tracker. The visual design, layout structure, and UI patterns are adapted from their work with deep appreciation.
-
-All artwork, videos, and written content on this site belong to ShiroN unless otherwise stated.
-
-© Reproduction of ShiroN's original works is permitted with proper attribution.
-
-This is a personal portfolio site and is not affiliated with Himejoshi, ppy, or osu! in any way.
-
-This website was generated and built with guidance from Claude AI (claude.ai). All design decisions, content, and creative direction were provided by ShiroN — Claude served as the coding assistant throughout the process.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── MY WEB CONFIRM MODAL ── -->
-  <div class="lightbox" id="myweb-modal" onclick="if(event.target===this||event.target.classList.contains('lb-backdrop'))closeMyWeb()">
-    <div class="lb-backdrop"></div>
-    <div class="lb-box" style="max-width:420px;width:88vw;flex-direction:column;">
-      <button class="lb-close" onclick="closeMyWeb()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="lb-info" style="width:100%;border-left:none;padding:32px 28px;">
-        <div class="lb-name" style="margin-bottom:14px;">🌐 Leaving the Garden</div>
-        <div class="lb-info-body" style="font-size:0.86rem;line-height:1.8;margin-bottom:24px;">You&rsquo;re about to visit a website I personally designed and built from scratch. It&rsquo;s a little corner of the internet that&rsquo;s entirely my own — hope you enjoy it! 🌸</div>
-        <div style="display:flex;gap:10px;justify-content:flex-end;">
-          <button onclick="closeMyWeb()" style="padding:8px 18px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--s2);color:var(--mid);font-family:var(--font);font-size:0.84rem;cursor:pointer;transition:all var(--t);">Cancel</button>
-          <button onclick="confirmMyWeb()" style="padding:8px 18px;border-radius:var(--r-sm);border:1px solid var(--pink-b);background:var(--pink-b);color:var(--hi);font-family:var(--font);font-size:0.84rem;cursor:pointer;transition:all var(--t);">Let&rsquo;s go!</button>
+    </script>
+        <div id="myAbout" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeAbout()">&times;</a>
+      <div class="overlay-content">
+        <div class="section">
+          <img src="lilithwink.gif" alt="莉莉絲wink">
+            <div class="section-content">
+              <p>海泥豪！我是 <b>ShiroN</b>，也可以叫我白貓 :>
+                <br>我有很多興趣，例如畫畫、剪影片，以及很多很多。
+                <br>每張圖、每支影片，無論過程花了多久時間，只要能讓某個看到的人揚起嘴角，對我來說，那便足夠了。
+                <br>我相信，創作不用完美，只要付諸真心，總有一天，會有人理解、有人喜歡，
+                <br>只要我不放棄，總有一天，我會讓更多人看見我。
+                <br>希望在未來的創作不單是展現自己，更能為別人帶來改變，在那些人的心中留下我的名字。</p>
+            </div>
+        </div>
+        <hr>
+        <div class="section reverse">
+          <img src="selfie.png" alt="自拍_插圖">
+          <div class="section-content">
+            <p style="color:#ffffff;font-weight:bold;">個人簡介</p>
+            <p>我生在台灣的一個城市──新竹。從小，我就對各種事情感興趣，
+              <br>由於感興趣的事情很多，所以我自己也努力研究過很多不同的事物，接觸過很多不同的領域。感興趣，
+              <br>這些經驗讓我能用不同的角度思考，且能夠用領域間相似的概念去學習。
+              <br>我一開始並不喜歡自己，在成長過程中，有許多人對我有著深刻的影響。
+              <br>正是因為他們，才能有現在這個「我喜歡的我」。
+              <br>也因此，我非常尊敬每一個為我帶來影響的人，也希望有一天，我也能像他們一樣，為他人帶去改變。
+              <br>這份信念是現在的我創作的動力。 如果你願意支持我的話，歡迎追蹤我！(。 ’▽’。)♡
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- ── LANGUAGE MODAL ── -->
-  <div class="lightbox" id="lang-modal" onclick="if(event.target===this||event.target.classList.contains('lb-backdrop'))closeLang()">
-    <div class="lb-backdrop"></div>
-    <div class="lb-box" style="max-width:380px;width:88vw;flex-direction:column;">
-      <button class="lb-close" onclick="closeLang()"><i class="fa-solid fa-xmark"></i></button>
-      <div class="lb-info" style="width:100%;border-left:none;padding:28px 24px;">
-        <div class="lb-name" style="margin-bottom:18px;">🌐 Language</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <button class="lang-option" id="lang-opt-mix" onclick="setLang('mix')" data-active="true">
-            <span class="lang-opt-dot"></span>
-            <div>
-              <div class="lang-opt-name">Default (Mixed)</div>
-              <div class="lang-opt-desc">Original bilingual content</div>
-            </div>
-          </button>
-          <button class="lang-option" id="lang-opt-en" onclick="setLang('en')">
-            <span class="lang-opt-dot"></span>
-            <div>
-              <div class="lang-opt-name">English</div>
-              <div class="lang-opt-desc">All UI in English</div>
-            </div>
-          </button>
-          <button class="lang-option" id="lang-opt-zh" onclick="setLang('zh')">
-            <span class="lang-opt-dot"></span>
-            <div>
-              <div class="lang-opt-name">Mandarin / 中文</div>
-              <div class="lang-opt-desc">所有介面顯示為中文</div>
-            </div>
-          </button>
-        </div>
+    <div class="background" id="bg"></div>
+    <div class="center-wrapper">
+      <div class="container">
+        <table style="width:100%">
+          <tr>
+            <th>
+              <p style="font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3) ;color: rgba(255, 255, 255, 0.85);">ShiroN</p>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <div class="ProfilePicture">
+                <img id="ProfilePicture" src="https://i.imgur.com/VO4jg25.gif" width="200px" height="200px" />
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <p style="padding-bottom: 20px; font-size:20px; font-family: 'ZCOOL KuaiLe', Arial; font-weight: 700;text-shadow: 0px 3px 4px rgba(0,0,0,0.3); color: rgba(255, 255, 255, 0.8); margin: 0.5em 0 0 0;" class="fit-text">
+                我是 ShiroN，網路上的一個普通人 :)
+              </p>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                <a href="https://www.youtube.com/@uwuShiroN">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=44112&format=png&color=000000">
+                </a>
+                <a href="https://discord.gg/FBPGSRhFbV">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000">
+                </a>
+                <a href="https://x.com/uwuShiroN">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=bG29Ckcdp6YP&format=png&color=000000">
+                </a>
+                <a href="https://www.instagram.com/uwushiron/">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=43625&format=png&color=000000">
+                </a>
+                <a href="https://www.facebook.com/uwushiron">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=118501&format=png&color=000000">
+                </a>
+                <a href="https://github.com/uwuShiroN">
+                  <img class="icon" src="https://img.icons8.com/?size=100&id=52539&format=png&color=000000">
+                </a>
+              </div>
+            </th>
+          </tr>
+        </table>
       </div>
     </div>
-  </div>
-
-</body>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>ShiroN</h3>
+          <hr>
+          <p>Digital artist sharing illustrations and visual stories.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Other Links</h3>
+          <hr>
+          <div class="OtherLinks">
+            <a href="https://www.youtube.com/playlist?list=PLV_a83IjJKiAEqJUU3SpphjhYQVsif4Ug" target="_blank"><i class="fab Youtube">Youtube Music List</i></a>
+            <!--
+            <br><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank"><i class="fab fa-github">idk</i></a>
+            <br><a href="" target="_blank"><i class="fab fa-artstation"></i></a>
+            -->
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>My Artworks</h3>
+          <hr>
+          <div class="art-gallery">
+            <a href="https://www.facebook.com/share/p/19VVyei7q4/"><img src="https://pbs.twimg.com/media/GsL_Q1dXIAAP-9E?format=jpg&name=large" alt="Artwork 1"></a>
+            <p> More Artworks Coming Soon...</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        ShiroN's Garden / ShiroN's Personal Website
+      </div>
+    </footer>
+    <div class="arrow-up" id="arrowUp">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
+      </svg>
+    </div>
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        body { display: block !important; }
+      </style>
+      <div style="color:red;text-align:center;">This site requires JavaScript enabled.</div>
+    </noscript>
+  </body>
 </html>
